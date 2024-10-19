@@ -21,7 +21,7 @@ namespace Colors.util
 
         public const int COLORS_MSG_BOX_BUTTON_Y = 40;
 
-        public const int COLORS_MSG_BOX_LETTER_WIDTH = 5;
+        public const int COLORS_MSG_BOX_LETTER_WIDTH = 6;
         public const string COLORS_MSG_BOX_ERROR = "Colors: Error";
         public const string COLORS_MSG_BOX_INFO = "Colors: Information";
         public const string COLORS_MSG_BOX_WARINING = "Colors: Warning";
@@ -69,6 +69,8 @@ namespace Colors.util
         public const string SAVE_DECRYPT_TEXT = "The file with decrypt text has been saved in this folder.";
         // Aviso guardar imagen cifrada:
         public const string SAVE_ENCRYPT_IMAGE = "The image with encrypt text has been saved in this folder.";
+        // Aviso problemas de lectura:
+        public const string FILE_PROBLEMS = "Problems reading this file.";
 
         // Color formulario y controles
         public static Color CONTROLS_GENERAL_COLOR_ONE = Color.FromArgb(32, 32, 32);

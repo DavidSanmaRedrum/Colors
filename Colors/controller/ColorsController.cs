@@ -56,7 +56,7 @@ namespace Colors.controller {
                 }
                 File.WriteAllText(keyPath, fileData);
             } catch (Exception e) {
-                e.ToString();
+                e.ToString(); // No debe caer nunca en la excepción.
             }
         }
 
@@ -65,23 +65,23 @@ namespace Colors.controller {
             string line;
             int nLine = 1;
             string allColors = "";
+            string currentColor = "";
             try {
                 StreamReader sr = new StreamReader(Constants.KEY_IN_CURRENT_DIR);
                 while (null != (line = sr.ReadLine())) {
                     if (nLine == 1) nColorsQuantity = line.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR }).Length - 1;
                     int currentNColorsQuantity = line.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR }).Length - 1;
-                    if (Regex.IsMatch(line, "^.{1}[■]([0-9]{1,3}[≡]{1}[0-9]{1,3}[≡]{1}[0-9]{1,3}[≡]{1}[0-9]{1,3}[║]){" + nColorsQuantity + "}")) // Control REGEX
-                    {
-                        if (currentNColorsQuantity == nColorsQuantity) // Control de número de colores por letra.
-                        {
+                    if (Regex.IsMatch(line, "^.{1}[■]([0-9]{1,3}[≡]{1}[0-9]{1,3}[≡]{1}[0-9]{1,3}[≡]{1}[0-9]{1,3}[║]){" + nColorsQuantity + "}")) { // Control REGEX
+                        // Control de número de colores por letra. (Lo pillará cuando la línea siguiente tenga más colores que la primera de todas).
+                        // Si son menos lo pillará la regex, si son más, la regex la tomará como buena ignorando el color extra.
+                        if (currentNColorsQuantity == nColorsQuantity) {
                             line = line.Substring(0, line.Length - 1); // Recortamos el último separador usado para la regex y para que no pete el programa en el split de abajo.
                             char key = line[0];
                             line = line.Substring(2); // Recortamos el inicio, el caracter y el cuadrado.
                             string[] colors = line.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR });
 
                             string[] argbValues = new string[colors.Length];
-                            for (int i = 0; i < colors.Length; i++) // Control ARGB
-                            {
+                            for (int i = 0; i < colors.Length; i++) { // Control ARGB
                                 string[] argb = colors[i].Split(new char[] { Constants.KEY_VALUE_COLOR_ARGB_SEPARATOR });
                                 if (Convert.ToInt16(argb[0]) > Constants.MAX_LIMIT_ARGB || // A
                                     Convert.ToInt16(argb[1]) > Constants.MAX_LIMIT_ARGB || // R
@@ -92,7 +92,8 @@ namespace Colors.controller {
                                     return Constants.ARGB_FAILURE + nLine;
                                 }
                                 argbValues[i] = (Constants.KEY_VALUE_ZERO_DEFAULT + "") + Constants.KEY_VALUE_COMMA + argb[0] + Constants.KEY_VALUE_COMMA + argb[1] + Constants.KEY_VALUE_COMMA + argb[2] + Constants.KEY_VALUE_COMMA + argb[3]; // Adición del valor completo del color ARGB.
-                                mapListDecryptKeyValues.Add(argbValues[i].Substring(2), key); // Mapa de desencriptar. (Le quitamos el contador)
+                                currentColor = argbValues[i].Substring(2);
+                                mapListDecryptKeyValues.Add(currentColor, key); // Mapa de desencriptar. (Le quitamos el contador)
                             }
                             mapListEncryptKeyValues.Add(key, argbValues); // Mapa de encriptar.
                             allColors += line + (Constants.KEY_VALUE_COLOR_SEPARATOR + ""); // Volvemos a añadir el último separador para juntar todo.
@@ -107,17 +108,9 @@ namespace Colors.controller {
                     nLine++;
                 }
                 sr.Close();
-                letterColorsQuantity = nColorsQuantity; // Guardamos el valor en la variable global para hacerlo utilizable más abajo.
-                string[] allColorsArr = allColors.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR });
-                for (int i = 0; i < allColorsArr.Length; i++) // Control colores repetidos.
-                {
-                    for (int j = i + 1; j < allColorsArr.Length; j++) {
-                        if (allColorsArr[i].Equals(allColorsArr[j])) return Constants.REPEAT_COLORS_KEY_FILE + allColorsArr[i];
-                    }
-                }
                 return "";
             } catch (Exception e) {
-                return e.Message;
+                return Constants.REPEAT_COLORS_KEY_FILE + currentColor;
             }
         }
 
@@ -193,7 +186,7 @@ namespace Colors.controller {
                 sr.Close();
                 return output; // Pondrá un salto de línea extra. //output.Substring(0, output.Length - 1);
             } catch (Exception e) {
-                return e.Message;
+                return "";
             }
         }
 

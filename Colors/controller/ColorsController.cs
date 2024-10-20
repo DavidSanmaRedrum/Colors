@@ -65,7 +65,7 @@ namespace Colors.controller {
             string line;
             int nLine = 1;
             string allColors = "";
-            string currentColor = "";
+            string currentKey = "";
             try {
                 StreamReader sr = new StreamReader(Constants.KEY_IN_CURRENT_DIR);
                 while (null != (line = sr.ReadLine())) {
@@ -76,7 +76,7 @@ namespace Colors.controller {
                         // Si son menos lo pillará la regex, si son más, la regex la tomará como buena ignorando el color extra.
                         if (currentNColorsQuantity == nColorsQuantity) {
                             line = line.Substring(0, line.Length - 1); // Recortamos el último separador usado para la regex y para que no pete el programa en el split de abajo.
-                            char key = line[0];
+                            char letter = line[0];
                             line = line.Substring(2); // Recortamos el inicio, el caracter y el cuadrado.
                             string[] colors = line.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR });
 
@@ -92,10 +92,11 @@ namespace Colors.controller {
                                     return Constants.ARGB_FAILURE + nLine;
                                 }
                                 argbValues[i] = (Constants.KEY_VALUE_ZERO_DEFAULT + "") + Constants.KEY_VALUE_COMMA + argb[0] + Constants.KEY_VALUE_COMMA + argb[1] + Constants.KEY_VALUE_COMMA + argb[2] + Constants.KEY_VALUE_COMMA + argb[3]; // Adición del valor completo del color ARGB.
-                                currentColor = argbValues[i].Substring(2);
-                                mapListDecryptKeyValues.Add(currentColor, key); // Mapa de desencriptar. (Le quitamos el contador)
+                                currentKey = argbValues[i].Substring(2);
+                                mapListDecryptKeyValues.Add(currentKey, letter); // Mapa de desencriptar. (Le quitamos el contador)
                             }
-                            mapListEncryptKeyValues.Add(key, argbValues); // Mapa de encriptar.
+                            currentKey = letter + "";
+                            mapListEncryptKeyValues.Add(letter, argbValues); // Mapa de encriptar.
                             allColors += line + (Constants.KEY_VALUE_COLOR_SEPARATOR + ""); // Volvemos a añadir el último separador para juntar todo.
                         } else {
                             sr.Close();
@@ -109,8 +110,12 @@ namespace Colors.controller {
                 }
                 sr.Close();
                 return "";
-            } catch (Exception e) {
-                return Constants.REPEAT_COLORS_KEY_FILE + currentColor;
+            } catch (Exception e) { 
+                if (e.StackTrace.Contains(Constants.STACK_TRACE_DICTIONARY)) { // La key se repite en uno de los mapas.
+                    if (currentKey.Length > 1) return Constants.REPEAT_COLORS_KEY_FILE + currentKey;
+                    return Constants.REPEAT_CHARS_KEY_FILE + currentKey;
+                }
+                return Constants.FILE_PROBLEMS;
             }
         }
 

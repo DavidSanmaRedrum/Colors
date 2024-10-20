@@ -58,6 +58,7 @@ namespace Colors.util
         public const string ARGB_FAILURE = "KEY - ARGB error in line: ";
         public const string MIN_LIMIT_COLOR_FAILURE = "KEY - Number colors below 3 error in line: ";
         public const string REPEAT_COLORS_KEY_FILE = "KEY - Repeated color: ";
+        public const string REPEAT_CHARS_KEY_FILE = "KEY - Repeated character: ";
         public const string INCORRECT_NUMBER_OF_COLORS = "KEY - Incorrect number of colors in line: ";
         // Parametros de clave:
         public const string NO_COLOR_QUANTITY_VALUE = "Colors number per letter has not been selected.";
@@ -71,6 +72,8 @@ namespace Colors.util
         public const string SAVE_ENCRYPT_IMAGE = "The image with encrypt text has been saved in this folder.";
         // Aviso problemas de lectura:
         public const string FILE_PROBLEMS = "Problems reading this file.";
+        // Stack trace Dictionary:
+        public const string STACK_TRACE_DICTIONARY = "System.Collections.Generic.Dictionary";
 
         // Color formulario y controles
         public static Color CONTROLS_GENERAL_COLOR_ONE = Color.FromArgb(32, 32, 32);

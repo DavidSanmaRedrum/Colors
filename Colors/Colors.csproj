@@ -132,6 +132,7 @@
     <Content Include="ColorsIcon.ico" />
     <Content Include="images\AboutBigImage.png" />
     <Content Include="images\AboutImage.png" />
+    <Content Include="images\DestroyKey.png" />
     <Content Include="images\OnlyText.png" />
     <Content Include="images\OpenFileImage.png" />
   </ItemGroup>

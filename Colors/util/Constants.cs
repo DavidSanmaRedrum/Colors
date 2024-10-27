@@ -33,6 +33,8 @@ namespace Colors.util
         public const string COLORS_ACCEPT = "Accept";
         public const string COLORS_SAVE = "Save";
 
+        public const string DESTROY_KEY_REGEX = "\\d";
+
         public const string OPEN_FILE_DIALOG_TITLE = "Open file";
         public const string OPEN_FILE_DIALOG_FILTER = "TXT (*.txt)|*.txt|JPG (*.jpg)|*.jpg";
         public const string TXT_EXTENSION = ".txt";
@@ -48,6 +50,7 @@ namespace Colors.util
         public const string CHARACTERS = " ◙0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZÁÉÍÓÚÀÈÌÒÙ.,;¿?¡!+-*_@#~$%&/()=";
         public const string ONLY_NUMBERS_REGEX = "\\d+";
         public const string SPACE = " ";
+        public const string HASHTAG = "#";
         public const char KEY_VALUE_COLOR_SEPARATOR = '║';
         public const char KEY_VALUE_COLOR_ARGB_SEPARATOR = '≡';
         public const char KEY_VALUE_SQUARE = '■';
@@ -56,6 +59,7 @@ namespace Colors.util
         public const char KEY_VALUE_ZERO_DEFAULT = '0';
         public const char KEY_VALUE_ONE_DEFAULT = '1';
         public const char KEY_VALUE_COMMA = ',';
+        public const char DELETE_KEY_LINE_FEED = '¥'; // Este valor no debe estar en CHARACTERS si no hará un error en el split.
         // Errores de clave:
         public const string NO_EXISTS_KEY_FILE_MSG = "A new key has been created in this folder.";
         public const string PATTERN_FAILURE = "KEY - Pattern error in line: ";
@@ -78,6 +82,10 @@ namespace Colors.util
         public const string SAVE_ENCRYPT_IMAGE = "The image with encrypt text has been saved in this folder.";
         // Aviso problemas de lectura:
         public const string FILE_PROBLEMS = "Problems reading this file.";
+        // Aviso problemas de borrado de clave:
+        public const string DELETE_KEY_PROBLEMS = "Problems deleting this file.";
+        // Aviso clave borrada correctamente:
+        public const string DELETE_KEY_TRUE = "The key file has been destroyed.";
         // Stack trace Dictionary:
         public const string STACK_TRACE_DICTIONARY = "System.Collections.Generic.Dictionary";
 

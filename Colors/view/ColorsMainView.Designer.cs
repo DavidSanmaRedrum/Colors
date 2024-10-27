@@ -37,6 +37,8 @@ namespace Colors
             this.TextWithoutFileBtn = new System.Windows.Forms.ToolStripButton();
             this.SeparatorTwo = new System.Windows.Forms.ToolStripSeparator();
             this.AboutBtn = new System.Windows.Forms.ToolStripButton();
+            this.SeparatorThree = new System.Windows.Forms.ToolStripSeparator();
+            this.DestroyKeyBtn = new System.Windows.Forms.ToolStripButton();
             this.ColorsImageList = new System.Windows.Forms.ImageList(this.components);
             this.ActionBtn = new System.Windows.Forms.Button();
             this.ColorsToolStrip.SuspendLayout();
@@ -50,7 +52,9 @@ namespace Colors
             this.SeparatorOne,
             this.TextWithoutFileBtn,
             this.SeparatorTwo,
-            this.AboutBtn});
+            this.AboutBtn,
+            this.SeparatorThree,
+            this.DestroyKeyBtn});
             this.ColorsToolStrip.Location = new System.Drawing.Point(0, 0);
             this.ColorsToolStrip.Name = "ColorsToolStrip";
             this.ColorsToolStrip.Size = new System.Drawing.Size(500, 39);
@@ -93,9 +97,24 @@ namespace Colors
             this.AboutBtn.Image = ((System.Drawing.Image)(resources.GetObject("AboutBtn.Image")));
             this.AboutBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AboutBtn.Name = "AboutBtn";
-            this.AboutBtn.Size = new System.Drawing.Size(29, 36);
+            this.AboutBtn.Size = new System.Drawing.Size(29, 24);
             this.AboutBtn.Text = "About";
             this.AboutBtn.Click += new System.EventHandler(this.AboutBtn_Click);
+            // 
+            // SeparatorThree
+            // 
+            this.SeparatorThree.Name = "SeparatorThree";
+            this.SeparatorThree.Size = new System.Drawing.Size(6, 27);
+            // 
+            // DestroyKeyBtn
+            // 
+            this.DestroyKeyBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DestroyKeyBtn.Image = ((System.Drawing.Image)(resources.GetObject("DestroyKeyBtn.Image")));
+            this.DestroyKeyBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DestroyKeyBtn.Name = "DestroyKeyBtn";
+            this.DestroyKeyBtn.Size = new System.Drawing.Size(29, 36);
+            this.DestroyKeyBtn.Text = "Destroy key";
+            this.DestroyKeyBtn.Click += new System.EventHandler(this.DestroyKeyBtn_Click);
             // 
             // ColorsImageList
             // 
@@ -141,6 +160,8 @@ namespace Colors
         private System.Windows.Forms.ToolStripButton AboutBtn;
         private System.Windows.Forms.ToolStripButton TextWithoutFileBtn;
         private System.Windows.Forms.ToolStripSeparator SeparatorTwo;
+        private System.Windows.Forms.ToolStripSeparator SeparatorThree;
+        private System.Windows.Forms.ToolStripButton DestroyKeyBtn;
     }
 }
 

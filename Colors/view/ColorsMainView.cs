@@ -66,6 +66,7 @@ namespace Colors {
                 
                 ActionBtn.Text = actionButtonTitle;
                 ActionBtn.Enabled = true;
+                DestroyKeyBtn.Enabled = false;
             }
         }
 
@@ -78,6 +79,16 @@ namespace Colors {
                 ActionBtn.ForeColor = Color.BurlyWood;
                 ActionBtn.Text = Constants.ACTION_BUTTON_ENCRYPT;
                 ActionBtn.Enabled = true;
+                DestroyKeyBtn.Enabled = false;
+            }
+        }
+
+        private void DestroyKeyBtn_Click(object sender, EventArgs e) {
+            if (!ColorsController.destroyKey()) {
+                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, Constants.DELETE_KEY_PROBLEMS, false);
+            } else {
+                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.DELETE_KEY_TRUE, false);
+                this.Close();
             }
         }
 
@@ -117,6 +128,7 @@ namespace Colors {
                 }
                 encryptedImage.Dispose(); // Hacer que el programa deje de usar la imagen.
             }
+            DestroyKeyBtn.Enabled = true;
             this.filePath = "";
         }
 

@@ -195,6 +195,30 @@ namespace Colors.controller {
             }
         }
 
+        public static bool destroyKey() {
+            string line;
+            string output = "";
+            string keyPath = Constants.KEY_IN_CURRENT_DIR;
+            try {
+                StreamReader sr = new StreamReader(keyPath);
+                while (null != (line = sr.ReadLine())) {
+                    output += Regex.Replace(sr.ReadLine(), Constants.DESTROY_KEY_REGEX, Constants.HASHTAG) + Constants.DELETE_KEY_LINE_FEED + "";
+                }
+                sr.Close();
+                StreamWriter sw = new StreamWriter(keyPath);
+                string[] keyLines = output.Split(new char[] { Constants.DELETE_KEY_LINE_FEED });
+                for (int i = 0; i < keyLines.Length; i ++) {
+                    keyLines[i] = Regex.Replace(keyLines[i], Constants.DESTROY_KEY_REGEX, Constants.HASHTAG);
+                    sw.WriteLine(keyLines[i]);
+                }
+                sw.Close();
+                File.Delete(keyPath);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+
         private static string encryptOrDecryptTextOnly(string text, int key, bool mode) // César
         {
             string output = "";

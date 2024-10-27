@@ -202,13 +202,13 @@ namespace Colors.controller {
             try {
                 StreamReader sr = new StreamReader(keyPath);
                 while (null != (line = sr.ReadLine())) {
-                    output += Regex.Replace(sr.ReadLine(), Constants.DESTROY_KEY_REGEX, Constants.HASHTAG) + Constants.DELETE_KEY_LINE_FEED + "";
+                    output += line + Constants.DELETE_KEY_LINE_FEED + "";
                 }
                 sr.Close();
                 StreamWriter sw = new StreamWriter(keyPath);
                 string[] keyLines = output.Split(new char[] { Constants.DELETE_KEY_LINE_FEED });
                 for (int i = 0; i < keyLines.Length; i ++) {
-                    keyLines[i] = Regex.Replace(keyLines[i], Constants.DESTROY_KEY_REGEX, Constants.HASHTAG);
+                    keyLines[i] = Regex.Replace(keyLines[i], Constants.DELETE_KEY_REGEX, Constants.HASHTAG);
                     sw.WriteLine(keyLines[i]);
                 }
                 sw.Close();

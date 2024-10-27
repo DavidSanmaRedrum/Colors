@@ -34,7 +34,7 @@ namespace Colors.util
         public const string COLORS_ACCEPT = "Accept";
         public const string COLORS_SAVE = "Save";
 
-        public const string DESTROY_KEY_REGEX = "\\d";
+        public const string DELETE_KEY_REGEX = "\\d";
 
         public const string OPEN_FILE_DIALOG_TITLE = "Open file";
         public const string OPEN_FILE_DIALOG_FILTER = "TXT (*.txt)|*.txt|JPG (*.jpg)|*.jpg";
@@ -84,9 +84,9 @@ namespace Colors.util
         // Aviso problemas de lectura:
         public const string FILE_PROBLEMS = "Problems reading this file.";
         // Alerta de borrado de clave:
-        public const string DELETE_KEY_ALERT = "Are you sure you want to delete the key?";
+        public const string DELETE_KEY_ALERT = "Are you sure you want to destroy the key?";
         // Aviso problemas de borrado de clave:
-        public const string DELETE_KEY_PROBLEMS = "Problems deleting this file.";
+        public const string DELETE_KEY_PROBLEMS = "Problems destroying this file.";
         // Aviso clave borrada correctamente:
         public const string DELETE_KEY_TRUE = "The key file has been destroyed.";
         // Stack trace Dictionary:

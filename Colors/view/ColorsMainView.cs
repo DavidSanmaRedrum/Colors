@@ -90,7 +90,7 @@ namespace Colors {
                 if (!ColorsController.destroyKey()) {
                     ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, Constants.DELETE_KEY_PROBLEMS, false, false);
                 } else {
-                    File.Delete(Constants.KEY_IN_CURRENT_DIR);
+                    //File.Delete(Constants.KEY_IN_CURRENT_DIR);
                     ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.DELETE_KEY_TRUE, false, false);
                     this.Close();
                 }

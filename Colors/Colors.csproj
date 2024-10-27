@@ -82,11 +82,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="view\PreviewView.cs">
+    <Compile Include="view\CommonTextView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="view\PreviewView.Designer.cs">
-      <DependentUpon>PreviewView.cs</DependentUpon>
+    <Compile Include="view\CommonTextView.Designer.cs">
+      <DependentUpon>CommonTextView.cs</DependentUpon>
     </Compile>
     <Compile Include="view\KeyMakerView.cs">
       <SubType>Form</SubType>
@@ -112,8 +112,8 @@
     <EmbeddedResource Include="view\KeyMakerView.resx">
       <DependentUpon>KeyMakerView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="view\PreviewView.resx">
-      <DependentUpon>PreviewView.cs</DependentUpon>
+    <EmbeddedResource Include="view\CommonTextView.resx">
+      <DependentUpon>CommonTextView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -132,6 +132,7 @@
     <Content Include="ColorsIcon.ico" />
     <Content Include="images\AboutBigImage.png" />
     <Content Include="images\AboutImage.png" />
+    <Content Include="images\OnlyText.png" />
     <Content Include="images\OpenFileImage.png" />
   </ItemGroup>
   <ItemGroup>

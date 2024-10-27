@@ -10,7 +10,7 @@ using Colors.model;
 namespace Colors.controller {
     class ColorsController {
         private static int letterColorsQuantity = 0;
-        private static string decryptTextForPreview = "";
+        private static string textDataWithoutFile = "";
         private static Icon icon;
         private static Dictionary<char, string[]> mapListEncryptKeyValues = new Dictionary<char, string[]>();
         private static Dictionary<string, char> mapListDecryptKeyValues = new Dictionary<string, char>();
@@ -281,13 +281,13 @@ namespace Colors.controller {
         public static int getLetterColorsQuantity() {
             return letterColorsQuantity;
         }
-        
-        public static void setDecryptTextForPreview(string decryptText) {
-            decryptTextForPreview = decryptText;
+
+        public static void setTextDataWithoutFile(string text) {
+            textDataWithoutFile = text;
         }
 
-        public static string getDecryptTextForPreview() {
-            return decryptTextForPreview;
+        public static string getTextDataWithoutFile() {
+            return textDataWithoutFile;
         }
 
         public static void setIcon(Icon iconImage) {

@@ -1,6 +1,6 @@
 ﻿
 namespace Colors.view {
-    partial class PreviewView {
+    partial class CommonTextView {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -24,19 +24,20 @@ namespace Colors.view {
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PreviewView));
-            this.PreviewTextField = new System.Windows.Forms.RichTextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CommonTextView));
+            this.CommonTextField = new System.Windows.Forms.RichTextBox();
             this.CloseBtn = new System.Windows.Forms.Button();
-            this.SaveBtn = new System.Windows.Forms.Button();
+            this.CommonBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // PreviewTextField
+            // CommonTextField
             // 
-            this.PreviewTextField.Location = new System.Drawing.Point(12, 12);
-            this.PreviewTextField.Name = "PreviewTextField";
-            this.PreviewTextField.Size = new System.Drawing.Size(661, 305);
-            this.PreviewTextField.TabIndex = 0;
-            this.PreviewTextField.Text = "";
+            this.CommonTextField.Location = new System.Drawing.Point(12, 12);
+            this.CommonTextField.Name = "CommonTextField";
+            this.CommonTextField.Size = new System.Drawing.Size(661, 305);
+            this.CommonTextField.TabIndex = 0;
+            this.CommonTextField.Text = "";
+            this.CommonTextField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CommonTextField_KeyDown);
             // 
             // CloseBtn
             // 
@@ -48,36 +49,35 @@ namespace Colors.view {
             this.CloseBtn.UseVisualStyleBackColor = true;
             this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
             // 
-            // SaveBtn
+            // CommonBtn
             // 
-            this.SaveBtn.Location = new System.Drawing.Point(549, 323);
-            this.SaveBtn.Name = "SaveBtn";
-            this.SaveBtn.Size = new System.Drawing.Size(124, 39);
-            this.SaveBtn.TabIndex = 2;
-            this.SaveBtn.Text = "Save";
-            this.SaveBtn.UseVisualStyleBackColor = true;
-            this.SaveBtn.Click += new System.EventHandler(this.SaveBtn_Click);
+            this.CommonBtn.Location = new System.Drawing.Point(549, 323);
+            this.CommonBtn.Name = "CommonBtn";
+            this.CommonBtn.Size = new System.Drawing.Size(124, 39);
+            this.CommonBtn.TabIndex = 2;
+            this.CommonBtn.UseVisualStyleBackColor = true;
+            this.CommonBtn.Click += new System.EventHandler(this.CommonBtn_Click);
             // 
-            // PreviewView
+            // CommonTextView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 374);
-            this.Controls.Add(this.SaveBtn);
+            this.Controls.Add(this.CommonBtn);
             this.Controls.Add(this.CloseBtn);
-            this.Controls.Add(this.PreviewTextField);
+            this.Controls.Add(this.CommonTextField);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "PreviewView";
+            this.Name = "CommonTextView";
             this.Text = "Colors";
-            this.Load += new System.EventHandler(this.PreviewView_Load);
+            this.Load += new System.EventHandler(this.CommonTextView_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox PreviewTextField;
+        private System.Windows.Forms.RichTextBox CommonTextField;
         private System.Windows.Forms.Button CloseBtn;
-        private System.Windows.Forms.Button SaveBtn;
+        private System.Windows.Forms.Button CommonBtn;
     }
 }

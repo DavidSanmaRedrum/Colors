@@ -34,9 +34,11 @@ namespace Colors
             this.ColorsToolStrip = new System.Windows.Forms.ToolStrip();
             this.OpenFileBtn = new System.Windows.Forms.ToolStripButton();
             this.SeparatorOne = new System.Windows.Forms.ToolStripSeparator();
+            this.TextWithoutFileBtn = new System.Windows.Forms.ToolStripButton();
+            this.SeparatorTwo = new System.Windows.Forms.ToolStripSeparator();
             this.AboutBtn = new System.Windows.Forms.ToolStripButton();
             this.ColorsImageList = new System.Windows.Forms.ImageList(this.components);
-            this.FileActionBtn = new System.Windows.Forms.Button();
+            this.ActionBtn = new System.Windows.Forms.Button();
             this.ColorsToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,10 +48,12 @@ namespace Colors
             this.ColorsToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenFileBtn,
             this.SeparatorOne,
+            this.TextWithoutFileBtn,
+            this.SeparatorTwo,
             this.AboutBtn});
             this.ColorsToolStrip.Location = new System.Drawing.Point(0, 0);
             this.ColorsToolStrip.Name = "ColorsToolStrip";
-            this.ColorsToolStrip.Size = new System.Drawing.Size(400, 27);
+            this.ColorsToolStrip.Size = new System.Drawing.Size(500, 39);
             this.ColorsToolStrip.TabIndex = 0;
             this.ColorsToolStrip.Text = "toolStrip1";
             // 
@@ -59,7 +63,7 @@ namespace Colors
             this.OpenFileBtn.Image = ((System.Drawing.Image)(resources.GetObject("OpenFileBtn.Image")));
             this.OpenFileBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.OpenFileBtn.Name = "OpenFileBtn";
-            this.OpenFileBtn.Size = new System.Drawing.Size(29, 24);
+            this.OpenFileBtn.Size = new System.Drawing.Size(29, 36);
             this.OpenFileBtn.Text = "Open file";
             this.OpenFileBtn.Click += new System.EventHandler(this.OpenFileBtn_Click);
             // 
@@ -68,13 +72,28 @@ namespace Colors
             this.SeparatorOne.Name = "SeparatorOne";
             this.SeparatorOne.Size = new System.Drawing.Size(6, 27);
             // 
+            // TextWithoutFileBtn
+            // 
+            this.TextWithoutFileBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.TextWithoutFileBtn.Image = ((System.Drawing.Image)(resources.GetObject("TextWithoutFileBtn.Image")));
+            this.TextWithoutFileBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.TextWithoutFileBtn.Name = "TextWithoutFileBtn";
+            this.TextWithoutFileBtn.Size = new System.Drawing.Size(29, 24);
+            this.TextWithoutFileBtn.Text = "Text without file";
+            this.TextWithoutFileBtn.Click += new System.EventHandler(this.TextWithoutFileBtn_Click);
+            // 
+            // SeparatorTwo
+            // 
+            this.SeparatorTwo.Name = "SeparatorTwo";
+            this.SeparatorTwo.Size = new System.Drawing.Size(6, 27);
+            // 
             // AboutBtn
             // 
             this.AboutBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.AboutBtn.Image = ((System.Drawing.Image)(resources.GetObject("AboutBtn.Image")));
             this.AboutBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.AboutBtn.Name = "AboutBtn";
-            this.AboutBtn.Size = new System.Drawing.Size(29, 24);
+            this.AboutBtn.Size = new System.Drawing.Size(29, 36);
             this.AboutBtn.Text = "About";
             this.AboutBtn.Click += new System.EventHandler(this.AboutBtn_Click);
             // 
@@ -84,22 +103,22 @@ namespace Colors
             this.ColorsImageList.TransparentColor = System.Drawing.Color.Transparent;
             this.ColorsImageList.Images.SetKeyName(0, "ColorsIcon.ico");
             // 
-            // FileActionBtn
+            // ActionBtn
             // 
-            this.FileActionBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FileActionBtn.Location = new System.Drawing.Point(123, 55);
-            this.FileActionBtn.Name = "FileActionBtn";
-            this.FileActionBtn.Size = new System.Drawing.Size(152, 46);
-            this.FileActionBtn.TabIndex = 3;
-            this.FileActionBtn.UseVisualStyleBackColor = true;
-            this.FileActionBtn.Click += new System.EventHandler(this.FileActionBtn_Click);
+            this.ActionBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ActionBtn.Location = new System.Drawing.Point(123, 55);
+            this.ActionBtn.Name = "ActionBtn";
+            this.ActionBtn.Size = new System.Drawing.Size(152, 46);
+            this.ActionBtn.TabIndex = 3;
+            this.ActionBtn.UseVisualStyleBackColor = true;
+            this.ActionBtn.Click += new System.EventHandler(this.ActionBtn_Click);
             // 
             // ColorsMainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(400, 127);
-            this.Controls.Add(this.FileActionBtn);
+            this.Controls.Add(this.ActionBtn);
             this.Controls.Add(this.ColorsToolStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ColorsMainView";
@@ -118,8 +137,10 @@ namespace Colors
         private System.Windows.Forms.ToolStripButton OpenFileBtn;
         private System.Windows.Forms.ImageList ColorsImageList;
         private System.Windows.Forms.ToolStripSeparator SeparatorOne;
-        private System.Windows.Forms.Button FileActionBtn;
+        private System.Windows.Forms.Button ActionBtn;
         private System.Windows.Forms.ToolStripButton AboutBtn;
+        private System.Windows.Forms.ToolStripButton TextWithoutFileBtn;
+        private System.Windows.Forms.ToolStripSeparator SeparatorTwo;
     }
 }
 

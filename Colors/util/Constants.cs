@@ -13,6 +13,7 @@ namespace Colors.util
         public const int CANCEL_FUNCTIONALITY_CODE = 0;
         public const int PREVIEW_FUNCTIONALITY_CODE = 1;
         public const int SAVE_FUNCTIONALITY_CODE = 2;
+        public const int TEXT_WITHOUT_FILE_FUNCTIONALITY_CODE = 3;
 
         public const int COLORS_MSG_BOX_HEIGHT = 110;
         public const int COLORS_MSG_BOX_RIGHT_SPACE = 27;
@@ -28,6 +29,9 @@ namespace Colors.util
         public const string COLORS_MSG_BOX_ACCEPT_BUTTON = "Accept";
         public const string COLORS_MSG_BOX_SAVE_BUTTON = "Save";
         public const string COLORS_MSG_BOX_PREVIEW_BUTTON = "Preview";
+
+        public const string COLORS_ACCEPT = "Accept";
+        public const string COLORS_SAVE = "Save";
 
         public const string OPEN_FILE_DIALOG_TITLE = "Open file";
         public const string OPEN_FILE_DIALOG_FILTER = "TXT (*.txt)|*.txt|JPG (*.jpg)|*.jpg";
@@ -66,6 +70,8 @@ namespace Colors.util
         public const string INVALID_IMAGE = "Image not controlled by the application.";
         // Guardar o no texto descifrado:
         public const string SAVE_OR_PREVIEW = "You want to save the text or preview it?";
+        // TextBox de entrada sin fichero vacía:
+        public const string VOID_INPUT_TEXT_WITHOUT_FILE = "The text field is void.";
         // Aviso guardar texto descifrado:
         public const string SAVE_DECRYPT_TEXT = "The file with decrypt text has been saved in this folder.";
         // Aviso guardar imagen cifrada:

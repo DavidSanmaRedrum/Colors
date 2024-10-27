@@ -52,12 +52,12 @@ namespace Colors
             this.SeparatorOne,
             this.TextWithoutFileBtn,
             this.SeparatorTwo,
-            this.AboutBtn,
+            this.DestroyKeyBtn,
             this.SeparatorThree,
-            this.DestroyKeyBtn});
+            this.AboutBtn});
             this.ColorsToolStrip.Location = new System.Drawing.Point(0, 0);
             this.ColorsToolStrip.Name = "ColorsToolStrip";
-            this.ColorsToolStrip.Size = new System.Drawing.Size(500, 39);
+            this.ColorsToolStrip.Size = new System.Drawing.Size(400, 27);
             this.ColorsToolStrip.TabIndex = 0;
             this.ColorsToolStrip.Text = "toolStrip1";
             // 
@@ -67,7 +67,7 @@ namespace Colors
             this.OpenFileBtn.Image = ((System.Drawing.Image)(resources.GetObject("OpenFileBtn.Image")));
             this.OpenFileBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.OpenFileBtn.Name = "OpenFileBtn";
-            this.OpenFileBtn.Size = new System.Drawing.Size(29, 36);
+            this.OpenFileBtn.Size = new System.Drawing.Size(29, 24);
             this.OpenFileBtn.Text = "Open file";
             this.OpenFileBtn.Click += new System.EventHandler(this.OpenFileBtn_Click);
             // 
@@ -112,7 +112,7 @@ namespace Colors
             this.DestroyKeyBtn.Image = ((System.Drawing.Image)(resources.GetObject("DestroyKeyBtn.Image")));
             this.DestroyKeyBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.DestroyKeyBtn.Name = "DestroyKeyBtn";
-            this.DestroyKeyBtn.Size = new System.Drawing.Size(29, 36);
+            this.DestroyKeyBtn.Size = new System.Drawing.Size(29, 24);
             this.DestroyKeyBtn.Text = "Destroy key";
             this.DestroyKeyBtn.Click += new System.EventHandler(this.DestroyKeyBtn_Click);
             // 

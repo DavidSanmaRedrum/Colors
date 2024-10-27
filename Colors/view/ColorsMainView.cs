@@ -108,13 +108,15 @@ namespace Colors {
             string data = ColorsController.getTextDataWithoutFile();
             if (path.EndsWith(Constants.TXT_EXTENSION) || data.Length > 0) {
                 if (data.Length == 0) data = ColorsController.getFileData(path);
+                string title = Constants.COLORS_MSG_BOX_ERROR;
+                string message = Constants.FILE_PROBLEMS;
                 if (!data.Equals("")) {
                     Bitmap encryptedImage = ColorsController.encryptText(data);
                     encryptedImage.Save(Constants.SAVE_ENCRYPTED_IMAGE_PATH);
-                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.SAVE_ENCRYPT_IMAGE, false, false);
-                } else {
-                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, Constants.FILE_PROBLEMS, false, false);
+                    title = Constants.COLORS_MSG_BOX_INFO;
+                    message = Constants.SAVE_ENCRYPT_IMAGE;
                 }
+                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, title, message, false, false);
             } else {
                 Bitmap encryptedImage = new Bitmap(path);
                 string decryptedText = ColorsController.decryptImage(encryptedImage);

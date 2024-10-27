@@ -212,7 +212,6 @@ namespace Colors.controller {
                     sw.WriteLine(keyLines[i]);
                 }
                 sw.Close();
-                File.Delete(keyPath);
                 return true;
             } catch (Exception e) {
                 return false;
@@ -293,8 +292,8 @@ namespace Colors.controller {
             return output;
         }
 
-        public static int callColorsMessageBox(int height, string title, string message, bool preview) {
-            ColorsMessageBox messageBox = new ColorsMessageBox(height, title, message, preview, icon);
+        public static int callColorsMessageBox(int height, string title, string message, bool acceptAndCancel, bool preview) {
+            ColorsMessageBox messageBox = new ColorsMessageBox(height, title, message, acceptAndCancel, preview, icon);
             return messageBox.show();
         }
 

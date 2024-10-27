@@ -38,8 +38,9 @@ namespace Colors.view {
             } else {
                 ColorsController.callColorsMessageBox(
                     Constants.COLORS_MSG_BOX_HEIGHT,
-                    Constants.COLORS_MSG_BOX_WARINING,
+                    Constants.COLORS_MSG_BOX_WARNING,
                     Constants.NO_COLOR_QUANTITY_VALUE,
+                    false,
                     false
                 );
             }

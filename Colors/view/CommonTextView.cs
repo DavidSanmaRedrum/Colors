@@ -58,7 +58,7 @@ namespace Colors.view {
         private void CommonBtn_Click(object sender, EventArgs e) {
             if (this.isPreviewActivated) {
                 File.WriteAllText(Constants.SAVE_DECRYPTED_TEXT_PATH, CommonTextField.Text);
-                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.SAVE_DECRYPT_TEXT, false);
+                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.SAVE_DECRYPT_TEXT, false, false);
                 this.decryptTextForPreview = "";
                 this.Close();
             } else if (!CommonTextField.Text.Equals("")) {
@@ -66,7 +66,7 @@ namespace Colors.view {
                 this.functionality = Constants.TEXT_WITHOUT_FILE_FUNCTIONALITY_CODE;
                 this.Close();
             } else {
-                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, Constants.VOID_INPUT_TEXT_WITHOUT_FILE, false);
+                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, Constants.VOID_INPUT_TEXT_WITHOUT_FILE, false, false);
             }
         }
 

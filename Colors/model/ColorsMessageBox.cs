@@ -10,7 +10,7 @@ namespace Colors.model
         private Form colorsMessageBox;
         private int functionality = Constants.CANCEL_FUNCTIONALITY_CODE;
 
-        public ColorsMessageBox(int height, string title, string message, bool preview, Icon icon)
+        public ColorsMessageBox(int height, string title, string message, bool acceptAndCancel, bool preview, Icon icon)
         {
             // Longitud del mensaje * ancho en píxeles de una letra mayúscula.
             int messageWidth = message.Length * Constants.COLORS_MSG_BOX_LETTER_WIDTH;
@@ -36,22 +36,27 @@ namespace Colors.model
             this.colorsMessageBox.Controls.Add(msg);
 
 
-            string buttonMessage = Constants.COLORS_MSG_BOX_ACCEPT_BUTTON;
+            string defaultButtonMessage = Constants.COLORS_MSG_BOX_ACCEPT_BUTTON;
 
-            if (preview) {
-                buttonMessage = Constants.COLORS_MSG_BOX_SAVE_BUTTON;
-                Button previewBtn = new Button();
-                previewBtn.Click += new EventHandler(previewBtn_Click);
-                previewBtn.Text = Constants.COLORS_MSG_BOX_PREVIEW_BUTTON;
-                previewBtn.Location = new Point(messageWidth - previewBtn.Width * 2, Constants.COLORS_MSG_BOX_BUTTON_Y);
-                previewBtn.ForeColor = white;
-                this.colorsMessageBox.Controls.Add(previewBtn);
+            if (preview || acceptAndCancel) {
+                
+                Button secondaryBtn = new Button();
+                secondaryBtn.Click += new EventHandler(secondaryBtn_Click);
+                string secondaryButtonMessage = Constants.COLORS_MSG_BOX_CANCEL_BUTTON;
+                if (!acceptAndCancel) {
+                    defaultButtonMessage = Constants.COLORS_MSG_BOX_SAVE_BUTTON;
+                    secondaryButtonMessage = Constants.COLORS_MSG_BOX_PREVIEW_BUTTON;
+                }
+                secondaryBtn.Text = secondaryButtonMessage;
+                secondaryBtn.Location = new Point(messageWidth - secondaryBtn.Width * 2, Constants.COLORS_MSG_BOX_BUTTON_Y);
+                secondaryBtn.ForeColor = white;
+                this.colorsMessageBox.Controls.Add(secondaryBtn);
             }
 
             // Botón por defecto, aceptar o guardar.
             Button defaultBtn = new Button();
             defaultBtn.Click += new EventHandler(defaultBtn_Click);
-            defaultBtn.Text = buttonMessage;
+            defaultBtn.Text = defaultButtonMessage;
             defaultBtn.Location = new Point(messageWidth - defaultBtn.Width, Constants.COLORS_MSG_BOX_BUTTON_Y);
             defaultBtn.ForeColor = white;
             this.colorsMessageBox.Controls.Add(defaultBtn);
@@ -62,14 +67,14 @@ namespace Colors.model
             return this.functionality;
         }
 
-        private void previewBtn_Click(object sender, EventArgs e) {
+        private void secondaryBtn_Click(object sender, EventArgs e) {
             this.functionality = Constants.PREVIEW_FUNCTIONALITY_CODE;
             this.colorsMessageBox.Close();
         }
 
         private void defaultBtn_Click(object sender, EventArgs e)
         {
-            this.functionality = Constants.SAVE_FUNCTIONALITY_CODE;
+            this.functionality = Constants.DEFAULT_COMMONS_FUNCTIONALITY_CODE;
             this.colorsMessageBox.Close();
         }
      

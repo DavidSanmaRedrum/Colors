@@ -35,11 +35,11 @@ namespace Colors {
                 int colorsQuantity = ColorsController.getLetterColorsQuantity();
                 if (colorsQuantity > 0) {
                     ColorsController.createKeyFile(colorsQuantity);
-                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.NO_EXISTS_KEY_FILE_MSG, false);
+                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.NO_EXISTS_KEY_FILE_MSG, false, false);
                 }
                 this.Close();
             } else if (!(output = ColorsController.isKeyFileFormatCorrect()).Equals("")) {
-                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, output, false);
+                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, output, false, false);
                 this.Close();
             } else {
                 this.Opacity = 1;
@@ -76,7 +76,7 @@ namespace Colors {
             CommonTextView textWithoutFileInput = new CommonTextView();
             textWithoutFileInput.setIsPreviewActivated(false);
             if (textWithoutFileInput.show() == Constants.TEXT_WITHOUT_FILE_FUNCTIONALITY_CODE) {
-                ActionBtn.ForeColor = Color.BurlyWood;
+                ActionBtn.ForeColor = Color.Green;
                 ActionBtn.Text = Constants.ACTION_BUTTON_ENCRYPT;
                 ActionBtn.Enabled = true;
                 DestroyKeyBtn.Enabled = false;
@@ -84,11 +84,16 @@ namespace Colors {
         }
 
         private void DestroyKeyBtn_Click(object sender, EventArgs e) {
-            if (!ColorsController.destroyKey()) {
-                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, Constants.DELETE_KEY_PROBLEMS, false);
-            } else {
-                ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.DELETE_KEY_TRUE, false);
-                this.Close();
+            if (ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_WARNING, Constants.DELETE_KEY_ALERT, true, false)
+                == Constants.DEFAULT_COMMONS_FUNCTIONALITY_CODE) {
+
+                if (!ColorsController.destroyKey()) {
+                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, Constants.DELETE_KEY_PROBLEMS, false, false);
+                } else {
+                    File.Delete(Constants.KEY_IN_CURRENT_DIR);
+                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.DELETE_KEY_TRUE, false, false);
+                    this.Close();
+                }
             }
         }
 
@@ -106,25 +111,25 @@ namespace Colors {
                 if (!data.Equals("")) {
                     Bitmap encryptedImage = ColorsController.encryptText(data);
                     encryptedImage.Save(Constants.SAVE_ENCRYPTED_IMAGE_PATH);
-                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.SAVE_ENCRYPT_IMAGE, false);
+                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.SAVE_ENCRYPT_IMAGE, false, false);
                 } else {
-                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, Constants.FILE_PROBLEMS, false);
+                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, Constants.FILE_PROBLEMS, false, false);
                 }
             } else {
                 Bitmap encryptedImage = new Bitmap(path);
                 string decryptedText = ColorsController.decryptImage(encryptedImage);
                 int dialogCode = Constants.CANCEL_FUNCTIONALITY_CODE;
                 if (!decryptedText.Equals(Constants.INVALID_IMAGE)
-                    && (dialogCode = ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.SAVE_OR_PREVIEW, true)) == Constants.SAVE_FUNCTIONALITY_CODE) {
+                    && (dialogCode = ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.SAVE_OR_PREVIEW, false, true)) == Constants.DEFAULT_COMMONS_FUNCTIONALITY_CODE) {
                     File.WriteAllText(Constants.SAVE_DECRYPTED_TEXT_PATH, decryptedText);
-                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.SAVE_DECRYPT_TEXT, false);
+                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.SAVE_DECRYPT_TEXT, false, false);
                 } else if (!decryptedText.Equals(Constants.INVALID_IMAGE) && dialogCode == Constants.PREVIEW_FUNCTIONALITY_CODE) {
                     CommonTextView previewView = new CommonTextView();
                     previewView.setIsPreviewActivated(true);
                     previewView.setDecryptTextForPreview(decryptedText);
                     previewView.show();
                 } else if (decryptedText.Equals(Constants.INVALID_IMAGE)) {
-                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, decryptedText, false);
+                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, decryptedText, false, false);
                 }
                 encryptedImage.Dispose(); // Hacer que el programa deje de usar la imagen.
             }

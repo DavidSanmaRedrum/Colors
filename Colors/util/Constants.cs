@@ -12,7 +12,7 @@ namespace Colors.util
 
         public const int CANCEL_FUNCTIONALITY_CODE = 0;
         public const int PREVIEW_FUNCTIONALITY_CODE = 1;
-        public const int SAVE_FUNCTIONALITY_CODE = 2;
+        public const int DEFAULT_COMMONS_FUNCTIONALITY_CODE = 2;
         public const int TEXT_WITHOUT_FILE_FUNCTIONALITY_CODE = 3;
 
         public const int COLORS_MSG_BOX_HEIGHT = 110;
@@ -25,8 +25,9 @@ namespace Colors.util
         public const int COLORS_MSG_BOX_LETTER_WIDTH = 6;
         public const string COLORS_MSG_BOX_ERROR = "Colors: Error";
         public const string COLORS_MSG_BOX_INFO = "Colors: Information";
-        public const string COLORS_MSG_BOX_WARINING = "Colors: Warning";
+        public const string COLORS_MSG_BOX_WARNING = "Colors: Warning";
         public const string COLORS_MSG_BOX_ACCEPT_BUTTON = "Accept";
+        public const string COLORS_MSG_BOX_CANCEL_BUTTON = "Cancel";
         public const string COLORS_MSG_BOX_SAVE_BUTTON = "Save";
         public const string COLORS_MSG_BOX_PREVIEW_BUTTON = "Preview";
 
@@ -82,6 +83,8 @@ namespace Colors.util
         public const string SAVE_ENCRYPT_IMAGE = "The image with encrypt text has been saved in this folder.";
         // Aviso problemas de lectura:
         public const string FILE_PROBLEMS = "Problems reading this file.";
+        // Alerta de borrado de clave:
+        public const string DELETE_KEY_ALERT = "Are you sure you want to delete the key?";
         // Aviso problemas de borrado de clave:
         public const string DELETE_KEY_PROBLEMS = "Problems deleting this file.";
         // Aviso clave borrada correctamente:

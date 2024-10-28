@@ -25,21 +25,18 @@ namespace Colors.controller {
             string fileData = "";
             string colorsLine;
             int positionCounter = 0;
-            string argbValue = null;
             try {
                 HashSet<string> colorValues = new HashSet<string>(1); // HashSet no acepta valores repetidos.
                 Random argbRandom = new Random();
                 while (colorValues.Count < (Constants.CHARACTERS.Length * nColorsByCharacter)) // Carácteres (Filas)
                 {
                     for (int i = 0; i < nColorsByCharacter; i++) { // Colores por carácter (Columnas)
-                        for (int j = 0; j < Constants.ARGB_LENGTH; j++) { // ARGB
-                            int argb = argbRandom.Next(0, Constants.MAX_LIMIT_ARGB + 1); // Rango de 0 a 255
-                            string argbSeparator = Constants.KEY_VALUE_COLOR_ARGB_SEPARATOR + "";
-                            if (j == Constants.ARGB_LENGTH - 1) argbSeparator = "";
-                            argbValue += argb + argbSeparator;
-                        }
-                        colorValues.Add(argbValue);
-                        argbValue = null;
+                        // Rango de 0 a 255
+                        int alpha = argbRandom.Next(0, Constants.MAX_LIMIT_ARGB + 1);
+                        int red = argbRandom.Next(0, Constants.MAX_LIMIT_ARGB + 1);
+                        int green = argbRandom.Next(0, Constants.MAX_LIMIT_ARGB + 1);
+                        int blue = argbRandom.Next(0, Constants.MAX_LIMIT_ARGB + 1);
+                        colorValues.Add(String.Join(Constants.KEY_VALUE_COLOR_ARGB_SEPARATOR + "", alpha, red, green, blue));
                     }
                 }
                 string[] colorValuesArr = colorValues.ToArray(); // Lo traducimos a array para hacer más sencillo el proceso.

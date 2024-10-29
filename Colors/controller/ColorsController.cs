@@ -9,6 +9,7 @@ using Colors.model;
 
 namespace Colors.controller {
     class ColorsController {
+        private static int nColorsQuantityInKey = -1;
         private static int letterColorsQuantity = 0;
         private static string textDataWithoutFile = "";
         private static Icon icon;
@@ -68,7 +69,10 @@ namespace Colors.controller {
             try {
                 StreamReader sr = new StreamReader(Constants.KEY_IN_CURRENT_DIR);
                 while (null != (line = sr.ReadLine())) {
-                    if (nLine == 1) nColorsQuantity = line.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR }).Length - 1;
+                    if (nLine == 1) {
+                        nColorsQuantity = line.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR }).Length - 1;
+                        nColorsQuantityInKey = nColorsQuantity;
+                    }
                     int currentNColorsQuantity = line.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR }).Length - 1;
                     if (Regex.IsMatch(line, "^.{1}[■]([0-9]{1,3}[≡]{1}[0-9]{1,3}[≡]{1}[0-9]{1,3}[≡]{1}[0-9]{1,3}[║]){" + nColorsQuantity + "}")) { // Control REGEX
                         // Control de número de colores por letra. (Lo pillará cuando la línea siguiente tenga más colores que la primera de todas).
@@ -90,8 +94,8 @@ namespace Colors.controller {
                                     sr.Close();
                                     return Constants.ARGB_FAILURE + nLine;
                                 }
-                                argbValues[i] = (Constants.KEY_VALUE_ZERO_DEFAULT + "") + Constants.KEY_VALUE_COMMA + argb[0] + Constants.KEY_VALUE_COMMA + argb[1] + Constants.KEY_VALUE_COMMA + argb[2] + Constants.KEY_VALUE_COMMA + argb[3]; // Adición del valor completo del color ARGB.
-                                currentKey = argbValues[i].Substring(2);
+                                argbValues[i] = argb[0] + Constants.KEY_VALUE_COMMA + argb[1] + Constants.KEY_VALUE_COMMA + argb[2] + Constants.KEY_VALUE_COMMA + argb[3]; // Adición del valor completo del color ARGB.
+                                currentKey = argbValues[i];
                                 mapListDecryptKeyValues.Add(currentKey, letter); // Mapa de desencriptar. (Le quitamos el contador)
                             }
                             currentKey = letter + "";
@@ -144,12 +148,13 @@ namespace Colors.controller {
                 i++;
             }
 
+            Random randomPosition = new Random();
             Bitmap bitmap = new Bitmap(width, height);
             for (int nRow = 0; nRow < bitmap.Width; nRow++) {
                 for (int nCol = 0; nCol < bitmap.Height; nCol++) {
-                    string[] characterValues = getCharacterValues(textOfFile, pixelCounter); // Búsqueda valores del caracter.
-                    int[] currentColor = getARGBByValues(characterValues, textOfFile, pixelCounter); // Elección de color
-
+                    string[] characterColors = mapListEncryptKeyValues[textOfFile[pixelCounter]]; // Obtener el valor/Color con la clave (la clave, es el char actual).
+                    int[] currentColor = arrayStringToArrayInt(characterColors[randomPosition.Next(0, nColorsQuantityInKey)]
+                        .Split(new char[] { Constants.KEY_VALUE_COMMA })); // Elección de color (Rango de 0 a nColorsQuantityInKey -> Posición 0 del array tenida en cuenta)
                     bitmap.SetPixel(nRow, nCol, Color.FromArgb(currentColor[0], currentColor[1], currentColor[2], currentColor[3]));
                     pixelCounter++;
                 }
@@ -240,47 +245,6 @@ namespace Colors.controller {
             }
             if (!mode) return output.Replace(Constants.KEY_VALUE_LINE_FEED, Constants.KEY_VALUE_LINE_FEED_TWO);
             return output;
-        }
-
-        private static string[] getCharacterValues(string text, int counter) {
-            return mapListEncryptKeyValues[text[counter]]; // Obtener el valor con la clave (la clave, es el char actual).
-        }
-
-        private static int[] getARGBByValues(string[] values, string text, int counter) {
-            char character = text[counter];
-            string valuesWithoutDynamicBit;
-
-            for (int i = 0; i < values.Length; i++) {
-                if (values[i].StartsWith(Constants.KEY_VALUE_ZERO_DEFAULT + "")) // Buscar una de los valores que no tenga el 1.
-                {
-                    changeDynamicBitAndSaveChanges(i, values, character, Constants.KEY_VALUE_ONE_DEFAULT);
-                    valuesWithoutDynamicBit = values[i].Substring(2);
-                    return arrayStringToArrayInt(valuesWithoutDynamicBit.Split(new char[] { Constants.KEY_VALUE_COMMA }));
-                }
-            }
-            // SON todas son 1 vamos a resetear todo a 0. (-1: Reset)
-            changeDynamicBitAndSaveChanges(-1, values, character, Constants.KEY_VALUE_ZERO_DEFAULT);
-            // Ahora empezamos por la primera de nuevo.
-            changeDynamicBitAndSaveChanges(0, values, character, Constants.KEY_VALUE_ONE_DEFAULT);
-            valuesWithoutDynamicBit = values[0].Substring(2);
-            return arrayStringToArrayInt(valuesWithoutDynamicBit.Split(new char[] { Constants.KEY_VALUE_COMMA }));
-        }
-
-        private static void changeDynamicBitAndSaveChanges(int nValue, string[] values, char character, char bit) {
-            if (nValue != -1) {
-                string option = values[nValue];
-                option = option.Remove(0, 1); // Borrar la primera posición.
-                option = option.Insert(0, bit + ""); // Poner el bit.
-                values[nValue] = option;
-            } else { // Reset
-                for (int i = 0; i < values.Length; i++) {
-                    string option = values[i];
-                    option = option.Remove(0, 1);
-                    option = option.Insert(0, bit + "");
-                    values[i] = option;
-                }
-            }
-            mapListEncryptKeyValues[character] = values; // Modificación del estado en el mapa para que lo tenga en cuenta en el futuro.
         }
 
         private static int[] arrayStringToArrayInt(string[] arr) {

@@ -7,8 +7,8 @@ namespace Colors.util
     {
         public const int MAX_LIMIT_ARGB = 255;
         public const int ARGB_LENGTH = 4;
-        public const int MIN_LIMIT_COLOR = 2;
-        public const int MAX_LIMIT_COLOR = 10; // Dejarlo en 10
+        public const int MIN_LIMIT_COLOR = 4;
+        public const int MAX_LIMIT_COLOR = 15; // Dejarlo en 10
 
         public const int CANCEL_FUNCTIONALITY_CODE = 0;
         public const int PREVIEW_FUNCTIONALITY_CODE = 1;
@@ -57,8 +57,6 @@ namespace Colors.util
         public const char KEY_VALUE_SQUARE = '■';
         public const char KEY_VALUE_LINE_FEED = '◙';
         public const char KEY_VALUE_LINE_FEED_TWO = '\n';
-        public const char KEY_VALUE_ZERO_DEFAULT = '0';
-        public const char KEY_VALUE_ONE_DEFAULT = '1';
         public const char KEY_VALUE_COMMA = ',';
         public const char DELETE_KEY_LINE_FEED = '¥'; // Este valor no debe estar en CHARACTERS si no hará un error en el split.
         // Errores de clave:

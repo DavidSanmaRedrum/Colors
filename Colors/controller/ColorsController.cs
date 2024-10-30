@@ -100,7 +100,7 @@ namespace Colors.controller {
                             }
                             currentKey = letter + "";
                             mapListEncryptKeyValues.Add(letter, argbValues); // Mapa de encriptar.
-                            allColors += line + (Constants.KEY_VALUE_COLOR_SEPARATOR + ""); // Volvemos a añadir el último separador para juntar todo.
+                            allColors += line + Constants.KEY_VALUE_COLOR_SEPARATOR; // Volvemos a añadir el último separador para juntar todo.
                         } else {
                             sr.Close();
                             return Constants.INCORRECT_NUMBER_OF_COLORS + nLine;
@@ -165,15 +165,14 @@ namespace Colors.controller {
         public static string decryptImage(Bitmap image) {
             string output = "";
             string key = "";
+            char comma = Constants.KEY_VALUE_COMMA;
             try {
                 for (int nRow = 0; nRow < image.Width; nRow++) {
                     for (int nCol = 0; nCol < image.Height; nCol++) {
                         Color pixel = image.GetPixel(nRow, nCol);
                         MatchCollection matches = Regex.Matches(pixel.ToString(), Constants.ONLY_NUMBERS_REGEX);
-                        for (int i = 0; i < matches.Count; i++) {
-                            key += matches[i].ToString() + Constants.KEY_VALUE_COMMA;
-                        }
-                        output += mapListDecryptKeyValues[key.Substring(0, key.Length - 1)] + "";
+                        key = matches[0].ToString() + comma + matches[1].ToString() + comma + matches[2].ToString() + comma + matches[3].ToString();
+                        output += mapListDecryptKeyValues[key];
                         key = "";
                     }
                 }

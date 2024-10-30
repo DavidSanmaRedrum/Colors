@@ -67,6 +67,7 @@ namespace Colors.util
         public const string REPEAT_COLORS_KEY_FILE = "KEY - Repeated color: ";
         public const string REPEAT_CHARS_KEY_FILE = "KEY - Repeated character: ";
         public const string INCORRECT_NUMBER_OF_COLORS = "KEY - Incorrect number of colors in line: ";
+        public const string MISSING_CHARACTER = "KEY - Missing character: ";
         // Parametros de clave:
         public const string NO_COLOR_QUANTITY_VALUE = "Colors number per letter has not been selected.";
         // Imagen no controlada:

@@ -63,13 +63,15 @@ namespace Colors.controller {
         public static string isKeyFileFormatCorrect() {
             int nColorsQuantity = -1;
             string line;
-            int nLine = 1;
+            int nLine = 0;
             string allColors = "";
             string currentKey = "";
+            string characters = Constants.CHARACTERS;
             try {
                 StreamReader sr = new StreamReader(Constants.KEY_IN_CURRENT_DIR);
                 while (null != (line = sr.ReadLine())) {
-                    if (nLine == 1) {
+                    if (characters[nLine] != line[0]) return Constants.MISSING_CHARACTER + characters[nLine];
+                    if (nLine == 0) {
                         nColorsQuantity = line.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR }).Length - 1;
                         nColorsQuantityInKey = nColorsQuantity;
                     }
@@ -113,7 +115,7 @@ namespace Colors.controller {
                 }
                 sr.Close();
                 return "";
-            } catch (Exception e) { 
+            } catch (Exception e) {
                 if (e.StackTrace.Contains(Constants.STACK_TRACE_DICTIONARY)) { // La key se repite en uno de los mapas.
                     if (currentKey.Length > 1) return Constants.REPEAT_COLORS_KEY_FILE + currentKey;
                     return Constants.REPEAT_CHARS_KEY_FILE + currentKey;

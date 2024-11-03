@@ -129,29 +129,24 @@ namespace Colors.controller {
             // Si algún char no está contemplado dentro de characters no lo va a poner, en ese caso, se reducirá la longitud del texto, luego se compensará en los while con espacios.
             textOfFile = encryptOrDecryptTextOnly(textOfFile, letterColorsQuantity, true); // La key se sacará del número de colores que tenga asignado cada letra.
             int pixelCounter = 0;
-            int width = -1;
-            int height = -1;
-            int i = 1;
+            int baseAndHeight = 1;
+            int area = 1;
+            string characters = Constants.CHARACTERS;
 
-            while (width == -1) {
-                if (textOfFile.Length % i == 0 && i < textOfFile.Length && i > 2) {
-                    width = i;
-                } else if (i == textOfFile.Length) {
-                    string characters = Constants.CHARACTERS;
-                    textOfFile += characters[characters.IndexOf(Constants.SPACE) + letterColorsQuantity]; // Ciframos los espacios extra con la key.
-                    i = 0;
-                    width = -1;
-                }
-                i++;
+            while (area < textOfFile.Length) {
+                area = baseAndHeight * baseAndHeight; // b*a
+                baseAndHeight++;
             }
-            i = 1;
-            while (height == -1) {
-                if (width * i == textOfFile.Length) height = i;
-                i++;
+
+            int extraSpaces = area - textOfFile.Length;
+            if (extraSpaces > 0) {
+                for (int j = 0; j < extraSpaces; j ++) {
+                    textOfFile += characters[characters.IndexOf(Constants.END_SPACE) + letterColorsQuantity]; // Ciframos los espacios extra con la key.
+                }
             }
 
             Random randomPosition = new Random();
-            Bitmap bitmap = new Bitmap(width, height);
+            Bitmap bitmap = new Bitmap(baseAndHeight - 1, baseAndHeight - 1);
             for (int nRow = 0; nRow < bitmap.Width; nRow++) {
                 for (int nCol = 0; nCol < bitmap.Height; nCol++) {
                     string[] characterColors = mapListEncryptKeyValues[textOfFile[pixelCounter]]; // Obtener el valor/Color con la clave (la clave, es el char actual).
@@ -166,7 +161,7 @@ namespace Colors.controller {
 
         public static string decryptImage(Bitmap image) {
             string output = "";
-            string key = "";
+            string key;
             char comma = Constants.KEY_VALUE_COMMA;
             try {
                 for (int nRow = 0; nRow < image.Width; nRow++) {
@@ -191,7 +186,7 @@ namespace Colors.controller {
             try {
                 StreamReader sr = new StreamReader(path);
                 while (null != (line = sr.ReadLine())) {
-                    output += line + Constants.KEY_VALUE_LINE_FEED + "";
+                    output += line + Constants.KEY_VALUE_LINE_FEED;
                 }
                 sr.Close();
                 return output; // Pondrá un salto de línea extra. //output.Substring(0, output.Length - 1);
@@ -244,7 +239,10 @@ namespace Colors.controller {
                     }
                 }
             }
-            if (!mode) return output.Replace(Constants.KEY_VALUE_LINE_FEED, Constants.KEY_VALUE_LINE_FEED_TWO);
+            if (!mode) {
+                return output.Replace(Constants.KEY_VALUE_LINE_FEED, Constants.KEY_VALUE_LINE_FEED_TWO)
+                    .Replace(Constants.END_SPACE, "");
+            }
             return output;
         }
 

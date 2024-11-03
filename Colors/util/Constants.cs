@@ -48,9 +48,9 @@ namespace Colors.util
         public const string SAVE_DECRYPTED_TEXT_PATH = "./decryptedText.txt";
 
         public const string KEY_IN_CURRENT_DIR = "./key";
-        public const string CHARACTERS = " ◙0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZÁÉÍÓÚÀÈÌÒÙ.,:;¿?¡!+-*_@#~$%&/()=";
+        public const string CHARACTERS = " ◙©0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZÁÉÍÓÚÀÈÌÒÙ.,:;¿?¡!+-*_@#~$%&/()=";
         public const string ONLY_NUMBERS_REGEX = "\\d+";
-        public const string SPACE = " ";
+        public const string END_SPACE = "©";
         public const string HASHTAG = "#";
         public const char KEY_VALUE_COLOR_SEPARATOR = '║';
         public const char KEY_VALUE_COLOR_ARGB_SEPARATOR = '≡';

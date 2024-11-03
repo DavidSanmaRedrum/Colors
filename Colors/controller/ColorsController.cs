@@ -144,19 +144,22 @@ namespace Colors.controller {
                     textOfFile += characters[characters.IndexOf(Constants.END_SPACE) + letterColorsQuantity]; // Ciframos los espacios extra con la key.
                 }
             }
-
-            Random randomPosition = new Random();
-            Bitmap bitmap = new Bitmap(baseAndHeight - 1, baseAndHeight - 1);
-            for (int nRow = 0; nRow < bitmap.Width; nRow++) {
-                for (int nCol = 0; nCol < bitmap.Height; nCol++) {
-                    string[] characterColors = mapListEncryptKeyValues[textOfFile[pixelCounter]]; // Obtener el valor/Color con la clave (la clave, es el char actual).
-                    int[] currentColor = arrayStringToArrayInt(characterColors[randomPosition.Next(0, nColorsQuantityInKey)]
-                        .Split(new char[] { Constants.KEY_VALUE_COMMA })); // Elección de color (Rango de 0 a nColorsQuantityInKey -> Posición 0 del array tenida en cuenta)
-                    bitmap.SetPixel(nRow, nCol, Color.FromArgb(currentColor[0], currentColor[1], currentColor[2], currentColor[3]));
-                    pixelCounter++;
+            try {
+                Random randomPosition = new Random();
+                Bitmap bitmap = new Bitmap(baseAndHeight - 1, baseAndHeight - 1);
+                for (int nRow = 0; nRow < bitmap.Width; nRow++) {
+                    for (int nCol = 0; nCol < bitmap.Height; nCol++) {
+                        string[] characterColors = mapListEncryptKeyValues[textOfFile[pixelCounter]]; // Obtener el valor/Color con la clave (la clave, es el char actual).
+                        int[] currentColor = arrayStringToArrayInt(characterColors[randomPosition.Next(0, nColorsQuantityInKey)]
+                            .Split(new char[] { Constants.KEY_VALUE_COMMA })); // Elección de color (Rango de 0 a nColorsQuantityInKey -> Posición 0 del array tenida en cuenta)
+                        bitmap.SetPixel(nRow, nCol, Color.FromArgb(currentColor[0], currentColor[1], currentColor[2], currentColor[3]));
+                        pixelCounter++;
+                    }
                 }
+                return bitmap;
+            } catch (Exception e) {
+                return null;
             }
-            return bitmap;
         }
 
         public static string decryptImage(Bitmap image) {

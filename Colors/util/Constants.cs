@@ -81,7 +81,7 @@ namespace Colors.util
         // Aviso guardar imagen cifrada:
         public const string SAVE_ENCRYPT_IMAGE = "The image with encrypt text has been saved in this folder.";
         // Aviso problemas de lectura:
-        public const string FILE_PROBLEMS = "Problems reading this file.";
+        public const string FILE_PROBLEMS = "Problems reading this information.";
         // Alerta de borrado de clave:
         public const string DELETE_KEY_ALERT = "Are you sure you want to destroy the key?";
         // Aviso problemas de borrado de clave:

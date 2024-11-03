@@ -112,9 +112,11 @@ namespace Colors {
                 string message = Constants.FILE_PROBLEMS;
                 if (!data.Equals("")) {
                     Bitmap encryptedImage = ColorsController.encryptText(data);
-                    encryptedImage.Save(Constants.SAVE_ENCRYPTED_IMAGE_PATH);
-                    title = Constants.COLORS_MSG_BOX_INFO;
-                    message = Constants.SAVE_ENCRYPT_IMAGE;
+                    if (null != encryptedImage) {
+                        encryptedImage.Save(Constants.SAVE_ENCRYPTED_IMAGE_PATH);
+                        title = Constants.COLORS_MSG_BOX_INFO;
+                        message = Constants.SAVE_ENCRYPT_IMAGE;
+                    }
                 }
                 ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, title, message, false, false);
             } else {

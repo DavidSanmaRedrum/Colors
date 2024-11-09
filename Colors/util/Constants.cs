@@ -46,10 +46,10 @@ namespace Colors.util
         public const string TXT_EXTENSION = ".txt";
 
         public const string ACTION_BUTTON_ENCRYPT = "ENCRYPT TEXT";
-        public const string ACTION_BUTTON_DECRYPT = "DECRYPT IMAGE";
+        public const string ACTION_BUTTON_DECRYPT = "DECRYPT TOKEN";
         public const string ACTION_BUTTON_NEUTRAL = "· · ·";
 
-        public const string SAVE_ENCRYPTED_IMAGE_PATH = "./encryptedImage.jpg";
+        public const string SAVE_ENCRYPTED_IMAGE_PATH = "./token.jpg";
         public const string SAVE_DECRYPTED_TEXT_PATH = "./decryptedText.txt";
 
         public const string KEY_IN_CURRENT_DIR = "./key";

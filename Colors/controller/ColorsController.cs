@@ -9,20 +9,19 @@ using Colors.model;
 
 namespace Colors.controller {
     class ColorsController {
-        private static int nColorsQuantityInKey = -1;
+        private static int nColorsFirstLineKey = -1;
+        private static int isKeyCreationAuto = -1;
         private static int letterColorsQuantity = 0;
+        private static bool isPreviewActivated;
+        private static string decryptTextForPreview = "";
         private static string textDataWithoutFile = "";
+        private static string[] manuallyCreatedColors = null;
         private static Icon icon;
         private static Dictionary<char, string[]> mapListEncryptKeyValues = new Dictionary<char, string[]>();
         private static Dictionary<string, char> mapListDecryptKeyValues = new Dictionary<string, char>();
 
-        public static bool keyFileExists() {
-            return File.Exists(Constants.KEY_IN_CURRENT_DIR);
-        }
-
         public static void createKeyFile(int nColorsByCharacter) {
-            string keyPath = Constants.KEY_IN_CURRENT_DIR;
-            string colorsSeparator;
+            char colorsSeparator;
             string fileData = "";
             string colorsLine;
             int positionCounter = 0;
@@ -45,19 +44,34 @@ namespace Colors.controller {
                 string[] colorValuesArr = colorValues.ToArray(); // Lo traducimos a array para hacer más sencillo el proceso.
                 for (int i = 0; i < Constants.CHARACTERS.Length; i++) { // Letra
                     colorsLine = "";
-                    colorsSeparator = Constants.KEY_VALUE_COLOR_SEPARATOR + "";
+                    colorsSeparator = Constants.KEY_VALUE_COLOR_SEPARATOR;
                     for (int j = 0; j < nColorsByCharacter; j++) { // número de colores por carácter.
                         string value = colorValuesArr[positionCounter];
-                        if (j == nColorsByCharacter - 1) colorsSeparator = "";
                         colorsLine += value + colorsSeparator;
                         positionCounter++;
                     }
-                    fileData += Constants.CHARACTERS[i].ToString() + Constants.KEY_VALUE_SQUARE + colorsLine + Constants.KEY_VALUE_COLOR_SEPARATOR + "\n";
+                    fileData += Constants.CHARACTERS[i].ToString() + Constants.KEY_VALUE_SQUARE + colorsLine + "\n";
                 }
-                File.WriteAllText(keyPath, fileData);
+                File.WriteAllText(Constants.KEY_IN_CURRENT_DIR, fileData);
             } catch (Exception e) {
                 e.ToString(); // No debe caer nunca en la excepción.
             }
+        }
+
+        public static void createManualKeyFile() {
+            string fileData = "";
+            string colorsLine;
+            string characters = Constants.CHARACTERS;
+            int colorsCounter = 0;
+            for (int i = 0; i < characters.Length; i++) {
+                colorsLine = "";
+                for (int j = 0; j < letterColorsQuantity; j ++) {
+                    colorsLine += manuallyCreatedColors[colorsCounter] + Constants.KEY_VALUE_COLOR_SEPARATOR;
+                    colorsCounter++;
+                }
+                fileData += characters[i].ToString() + Constants.KEY_VALUE_SQUARE + colorsLine + "\n";
+            }
+            File.WriteAllText(Constants.KEY_IN_CURRENT_DIR, fileData);
         }
 
         public static string isKeyFileFormatCorrect() {
@@ -73,7 +87,7 @@ namespace Colors.controller {
                     if (characters[nLine] != line[0]) return Constants.MISSING_CHARACTER + characters[nLine];
                     if (nLine == 0) {
                         nColorsQuantity = line.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR }).Length - 1;
-                        nColorsQuantityInKey = nColorsQuantity;
+                        nColorsFirstLineKey = nColorsQuantity;
                     }
                     int currentNColorsQuantity = line.Split(new char[] { Constants.KEY_VALUE_COLOR_SEPARATOR }).Length - 1;
                     if (Regex.IsMatch(line, "^.{1}[■]([0-9]{1,3}[≡]{1}[0-9]{1,3}[≡]{1}[0-9]{1,3}[≡]{1}[0-9]{1,3}[║]){" + nColorsQuantity + "}")) { // Control REGEX
@@ -150,8 +164,8 @@ namespace Colors.controller {
                 for (int nRow = 0; nRow < bitmap.Width; nRow++) {
                     for (int nCol = 0; nCol < bitmap.Height; nCol++) {
                         string[] characterColors = mapListEncryptKeyValues[textOfFile[pixelCounter]]; // Obtener el valor/Color con la clave (la clave, es el char actual).
-                        int[] currentColor = arrayStringToArrayInt(characterColors[randomPosition.Next(0, nColorsQuantityInKey)]
-                            .Split(new char[] { Constants.KEY_VALUE_COMMA })); // Elección de color (Rango de 0 a nColorsQuantityInKey -> Posición 0 del array tenida en cuenta)
+                        int[] currentColor = arrayStringToArrayInt(characterColors[randomPosition.Next(0, nColorsFirstLineKey)] // La cantidad de colores de la primera línea es correcta en todos los carácteres, si no, NO llega AQUÍ.
+                            .Split(new char[] { Constants.KEY_VALUE_COMMA })); // Elección de color (Rango de 0 a nColorsFirstLineKey -> Posición 0 del array tenida en cuenta)
                         bitmap.SetPixel(nRow, nCol, Color.FromArgb(currentColor[0], currentColor[1], currentColor[2], currentColor[3]));
                         pixelCounter++;
                     }
@@ -262,6 +276,14 @@ namespace Colors.controller {
             return messageBox.show();
         }
 
+        public static void setIsKeyCreationAuto(int creationKeyType) {
+            isKeyCreationAuto = creationKeyType;
+        }
+
+        public static int getIsKeyCreationAuto() {
+            return isKeyCreationAuto;
+        }
+
         public static void setLetterColorsQuantity(int colorsQuantity) {
             letterColorsQuantity = colorsQuantity;
         }
@@ -276,6 +298,30 @@ namespace Colors.controller {
 
         public static string getTextDataWithoutFile() {
             return textDataWithoutFile;
+        }
+
+        public static void setDecryptTextForPreview(string decryptText) {
+            decryptTextForPreview = decryptText;
+        }
+
+        public static string getDecryptTextForPreview() {
+            return decryptTextForPreview;
+        }
+
+        public static void setManuallyCreatedColors(string[] createdColors) {
+            manuallyCreatedColors = createdColors;
+        }
+
+        public static string[] getManuallyCreatedColors() {
+            return manuallyCreatedColors;
+        }
+
+        public static void setIsPreviewActivated(bool isPreviewView) {
+            isPreviewActivated = isPreviewView;
+        }
+
+        public static bool getIsPreviewActivated() {
+            return isPreviewActivated;
         }
 
         public static void setIcon(Icon iconImage) {

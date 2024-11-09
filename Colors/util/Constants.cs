@@ -8,7 +8,8 @@ namespace Colors.util
         public const int MAX_LIMIT_ARGB = 255;
         public const int ARGB_LENGTH = 4;
         public const int MIN_LIMIT_COLOR = 4;
-        public const int MAX_LIMIT_COLOR = 15; // Dejarlo en 10
+        public const int MAX_LIMIT_COLOR = 15;
+        public const int CANVAS_TOP_LEFT_MARGIN = 10;
 
         public const int CANCEL_FUNCTIONALITY_CODE = 0;
         public const int PREVIEW_FUNCTIONALITY_CODE = 1;
@@ -23,6 +24,10 @@ namespace Colors.util
         public const int COLORS_MSG_BOX_BUTTON_Y = 40;
 
         public const int COLORS_MSG_BOX_LETTER_WIDTH = 6;
+
+        public const int COLORS_KEY_MANUAL_CREATION_TYPE = 0;
+        public const int COLORS_KEY_AUTO_CREATION_TYPE = 1;
+
         public const string COLORS_MSG_BOX_ERROR = "Colors: Error";
         public const string COLORS_MSG_BOX_INFO = "Colors: Information";
         public const string COLORS_MSG_BOX_WARNING = "Colors: Warning";
@@ -90,6 +95,10 @@ namespace Colors.util
         public const string DELETE_KEY_TRUE = "The key file has been destroyed.";
         // Stack trace Dictionary:
         public const string STACK_TRACE_DICTIONARY = "System.Collections.Generic.Dictionary";
+        // Información creación manual de clave:
+        public const string KEY_MANUAL_CREATION_INFO = "MOVE THE MOUSE INSIDE THE CANVAS";
+        // Información conservar clave manual si se cierra con el aspa roja:
+        public const string KEY_MANUAL_CREATION_CLOSE_SAVE_ALERT = "The key is created, Accept to save it or Cancel to delete it.";
 
         // Color formulario y controles
         public static Color CONTROLS_GENERAL_COLOR_ONE = Color.FromArgb(32, 32, 32);

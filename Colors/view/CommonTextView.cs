@@ -8,9 +8,9 @@ using System.Windows.Forms;
 namespace Colors.view {
     public partial class CommonTextView : Form {
 
-        private string decryptTextForPreview = "";
-        private bool isPreviewActivated;
         private int functionality = Constants.CANCEL_FUNCTIONALITY_CODE;
+        private bool isPreviewActivated;
+        private string decryptTextForPreview;
 
         public CommonTextView() {
             InitializeComponent();
@@ -20,6 +20,9 @@ namespace Colors.view {
         private void CommonTextView_Load(object sender, EventArgs e) {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+
+            this.isPreviewActivated = ColorsController.getIsPreviewActivated();
+            this.decryptTextForPreview = ColorsController.getDecryptTextForPreview();
 
             Color black = Constants.CONTROLS_GENERAL_COLOR_ONE;
             Color white = Color.White;
@@ -68,14 +71,6 @@ namespace Colors.view {
             } else {
                 ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, Constants.VOID_INPUT_TEXT_WITHOUT_FILE, false, false);
             }
-        }
-
-        public void setDecryptTextForPreview(string decryptText) {
-            this.decryptTextForPreview = decryptText;
-        }
-
-        public void setIsPreviewActivated(bool isPreviewView) {
-            this.isPreviewActivated = isPreviewView;
         }
 
         private void CommonTextField_KeyDown(object sender, KeyEventArgs e) {

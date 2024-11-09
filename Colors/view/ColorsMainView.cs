@@ -8,13 +8,14 @@ using System.Windows.Forms;
 
 namespace Colors {
     public partial class ColorsMainView : Form {
+
+        private string filePath = "";
+
         public ColorsMainView() {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.Opacity = 0;
         }
-
-        private string filePath = "";
 
         private void ColorsMainView_Load(object sender, EventArgs e) {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -29,12 +30,16 @@ namespace Colors {
 
             string output;
 
-            if (!ColorsController.keyFileExists()) {
+            if (!File.Exists(Constants.KEY_IN_CURRENT_DIR)) {
                 KeyMakerView keyCreator = new KeyMakerView();
                 keyCreator.ShowDialog();
-                int colorsQuantity = ColorsController.getLetterColorsQuantity();
-                if (colorsQuantity > 0) {
+                int creationType = ColorsController.getIsKeyCreationAuto();
+                if (creationType == Constants.COLORS_KEY_AUTO_CREATION_TYPE) {
+                    int colorsQuantity = ColorsController.getLetterColorsQuantity();
                     ColorsController.createKeyFile(colorsQuantity);
+                    ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.NO_EXISTS_KEY_FILE_MSG, false, false);
+                } else if (creationType == Constants.COLORS_KEY_MANUAL_CREATION_TYPE && null != ColorsController.getManuallyCreatedColors()) {
+                    ColorsController.createManualKeyFile();
                     ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.NO_EXISTS_KEY_FILE_MSG, false, false);
                 }
                 this.Close();
@@ -74,7 +79,7 @@ namespace Colors {
             this.filePath = ""; // Vaciar esto por si acaso.
             refreshActionBtn();
             CommonTextView textWithoutFileInput = new CommonTextView();
-            textWithoutFileInput.setIsPreviewActivated(false);
+            ColorsController.setIsPreviewActivated(false);
             if (textWithoutFileInput.show() == Constants.TEXT_WITHOUT_FILE_FUNCTIONALITY_CODE) {
                 ActionBtn.ForeColor = Color.Green;
                 ActionBtn.Text = Constants.ACTION_BUTTON_ENCRYPT;
@@ -129,8 +134,8 @@ namespace Colors {
                     ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_INFO, Constants.SAVE_DECRYPT_TEXT, false, false);
                 } else if (!decryptedText.Equals(Constants.INVALID_IMAGE) && dialogCode == Constants.PREVIEW_FUNCTIONALITY_CODE) {
                     CommonTextView previewView = new CommonTextView();
-                    previewView.setIsPreviewActivated(true);
-                    previewView.setDecryptTextForPreview(decryptedText);
+                    ColorsController.setIsPreviewActivated(true);
+                    ColorsController.setDecryptTextForPreview(decryptedText);
                     previewView.show();
                 } else if (decryptedText.Equals(Constants.INVALID_IMAGE)) {
                     ColorsController.callColorsMessageBox(Constants.COLORS_MSG_BOX_HEIGHT, Constants.COLORS_MSG_BOX_ERROR, decryptedText, false, false);

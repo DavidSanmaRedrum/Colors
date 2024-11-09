@@ -31,7 +31,8 @@ namespace Colors.view
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KeyMakerView));
             this.KeyParamsBox = new System.Windows.Forms.GroupBox();
-            this.KeyAcceptBtn = new System.Windows.Forms.Button();
+            this.ManualBtn = new System.Windows.Forms.Button();
+            this.AutomaticBtn = new System.Windows.Forms.Button();
             this.ColorsQuantCombo = new System.Windows.Forms.ComboBox();
             this.KeyMakerKLengthLbl = new System.Windows.Forms.Label();
             this.KeyParamsBox.SuspendLayout();
@@ -39,7 +40,8 @@ namespace Colors.view
             // 
             // KeyParamsBox
             // 
-            this.KeyParamsBox.Controls.Add(this.KeyAcceptBtn);
+            this.KeyParamsBox.Controls.Add(this.ManualBtn);
+            this.KeyParamsBox.Controls.Add(this.AutomaticBtn);
             this.KeyParamsBox.Controls.Add(this.ColorsQuantCombo);
             this.KeyParamsBox.Controls.Add(this.KeyMakerKLengthLbl);
             this.KeyParamsBox.Location = new System.Drawing.Point(12, 12);
@@ -49,15 +51,25 @@ namespace Colors.view
             this.KeyParamsBox.TabStop = false;
             this.KeyParamsBox.Text = "Key maker";
             // 
-            // KeyAcceptBtn
+            // ManualBtn
             // 
-            this.KeyAcceptBtn.Location = new System.Drawing.Point(124, 86);
-            this.KeyAcceptBtn.Name = "KeyAcceptBtn";
-            this.KeyAcceptBtn.Size = new System.Drawing.Size(143, 40);
-            this.KeyAcceptBtn.TabIndex = 3;
-            this.KeyAcceptBtn.Text = "Accept";
-            this.KeyAcceptBtn.UseVisualStyleBackColor = true;
-            this.KeyAcceptBtn.Click += new System.EventHandler(this.KeyAcceptBtn_Click);
+            this.ManualBtn.Location = new System.Drawing.Point(203, 85);
+            this.ManualBtn.Name = "ManualBtn";
+            this.ManualBtn.Size = new System.Drawing.Size(143, 40);
+            this.ManualBtn.TabIndex = 4;
+            this.ManualBtn.Text = "Manual creation";
+            this.ManualBtn.UseVisualStyleBackColor = true;
+            this.ManualBtn.Click += new System.EventHandler(this.ManualBtn_Click);
+            // 
+            // AutomaticBtn
+            // 
+            this.AutomaticBtn.Location = new System.Drawing.Point(42, 85);
+            this.AutomaticBtn.Name = "AutomaticBtn";
+            this.AutomaticBtn.Size = new System.Drawing.Size(143, 40);
+            this.AutomaticBtn.TabIndex = 3;
+            this.AutomaticBtn.Text = "Automatic creation";
+            this.AutomaticBtn.UseVisualStyleBackColor = true;
+            this.AutomaticBtn.Click += new System.EventHandler(this.AutomaticBtn_Click);
             // 
             // ColorsQuantCombo
             // 
@@ -97,6 +109,7 @@ namespace Colors.view
         private System.Windows.Forms.GroupBox KeyParamsBox;
         private System.Windows.Forms.Label KeyMakerKLengthLbl;
         private System.Windows.Forms.ComboBox ColorsQuantCombo;
-        private System.Windows.Forms.Button KeyAcceptBtn;
+        private System.Windows.Forms.Button AutomaticBtn;
+        private System.Windows.Forms.Button ManualBtn;
     }
 }

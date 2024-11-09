@@ -88,6 +88,12 @@
     <Compile Include="view\CommonTextView.Designer.cs">
       <DependentUpon>CommonTextView.cs</DependentUpon>
     </Compile>
+    <Compile Include="view\KeyCanvasView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="view\KeyCanvasView.Designer.cs">
+      <DependentUpon>KeyCanvasView.cs</DependentUpon>
+    </Compile>
     <Compile Include="view\KeyMakerView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="view\ColorsMainView.resx">
       <DependentUpon>ColorsMainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="view\KeyCanvasView.resx">
+      <DependentUpon>KeyCanvasView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="view\KeyMakerView.resx">
       <DependentUpon>KeyMakerView.cs</DependentUpon>
@@ -132,6 +141,7 @@
     <Content Include="ColorsIcon.ico" />
     <Content Include="images\AboutBigImage.png" />
     <Content Include="images\AboutImage.png" />
+    <Content Include="images\CanvasImage.png" />
     <Content Include="images\DestroyKey.png" />
     <Content Include="images\OnlyText.png" />
     <Content Include="images\OpenFileImage.png" />

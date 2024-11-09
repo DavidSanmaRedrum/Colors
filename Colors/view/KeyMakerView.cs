@@ -6,6 +6,7 @@ using System.Windows.Forms;
 
 namespace Colors.view {
     public partial class KeyMakerView : Form {
+
         public KeyMakerView() {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -21,7 +22,8 @@ namespace Colors.view {
 
             this.BackColor = black;
             KeyParamsBox.ForeColor = white;
-            KeyAcceptBtn.BackColor = black;
+            AutomaticBtn.BackColor = black;
+            ManualBtn.BackColor = black;
             ColorsQuantCombo.BackColor = black;
             ColorsQuantCombo.ForeColor = white;
 
@@ -30,20 +32,53 @@ namespace Colors.view {
             }
         }
 
-        private void KeyAcceptBtn_Click(object sender, EventArgs e) {
+        private void AutomaticBtn_Click(object sender, EventArgs e) {
             object selectedItem = this.ColorsQuantCombo.SelectedItem;
             if (null != selectedItem) {
+                ColorsController.setIsKeyCreationAuto(Constants.COLORS_KEY_AUTO_CREATION_TYPE);
                 ColorsController.setLetterColorsQuantity(Convert.ToInt16(selectedItem.ToString()));
                 this.Close();
             } else {
-                ColorsController.callColorsMessageBox(
+                this.showErrorMessage();
+            }
+        }
+
+        private void ManualBtn_Click(object sender, EventArgs e) {
+            object selectedItem = this.ColorsQuantCombo.SelectedItem;
+            if (null != selectedItem) {
+                ColorsController.setIsKeyCreationAuto(Constants.COLORS_KEY_MANUAL_CREATION_TYPE);
+                ColorsController.setLetterColorsQuantity(Convert.ToInt16(selectedItem.ToString()));
+                KeyCanvasView keyCanvas = new KeyCanvasView();
+                int dialogResponse = -1;
+                int acceptDialogResponse = Constants.DEFAULT_COMMONS_FUNCTIONALITY_CODE;
+                bool isAcceptButtonPressed = keyCanvas.show();
+                if (null == ColorsController.getManuallyCreatedColors()) {
+                    ColorsController.setIsKeyCreationAuto(-1);
+                } else if (!isAcceptButtonPressed && (dialogResponse = ColorsController.callColorsMessageBox(
                     Constants.COLORS_MSG_BOX_HEIGHT,
                     Constants.COLORS_MSG_BOX_WARNING,
-                    Constants.NO_COLOR_QUANTITY_VALUE,
-                    false,
-                    false
-                );
-            }
+                    Constants.KEY_MANUAL_CREATION_CLOSE_SAVE_ALERT,
+                    true,
+                    false)) == acceptDialogResponse) {
+                    this.Close();
+                } else if (!isAcceptButtonPressed && dialogResponse != acceptDialogResponse) {
+                    ColorsController.setManuallyCreatedColors(null);
+                } else {
+                    this.Close();
+                }
+            } else {
+                this.showErrorMessage();
+            } 
+        }
+
+        private void showErrorMessage() {
+            ColorsController.callColorsMessageBox(
+                Constants.COLORS_MSG_BOX_HEIGHT,
+                Constants.COLORS_MSG_BOX_WARNING,
+                Constants.NO_COLOR_QUANTITY_VALUE,
+                false,
+                false
+            );
         }
     }
 }

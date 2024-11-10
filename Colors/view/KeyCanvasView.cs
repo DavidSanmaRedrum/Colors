@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Colors.view {
@@ -12,6 +14,8 @@ namespace Colors.view {
         private bool isAcceptButtonPressed = false;
         private HashSet<string> keyARGBManualParams = new HashSet<string>();
         private int keyARGBSize = 0;
+        //private int canvasPrevX = -1;
+        //private int canvasPrevY = -1;
         private bool firstTurn = true;
         private bool isPickupActivated = true;
         private string argbColor = "";
@@ -49,7 +53,7 @@ namespace Colors.view {
 
         private void KeyCanvas_MouseMove(object sender, MouseEventArgs e) {
             if (this.keyARGBManualParams.Count < this.keyARGBSize) {
-                int xPos = Convert.ToInt32(e.X);
+                int xPos = Convert.ToInt32(e.X); // Posiciones actuales.
                 int yPos = Convert.ToInt32(e.Y);
                 if (this.firstTurn) {
                     this.firstTurn = false;
@@ -59,6 +63,8 @@ namespace Colors.view {
                     this.argbColor += xPos.ToString() + this.argbSeparator + yPos.ToString();
                     this.keyARGBManualParams.Add(this.argbColor);
                 }
+                //this.canvasPrevX = xPos; // Posiciones previas.
+                //this.canvasPrevY = yPos;
             } else {
                 PickupFrecuencyIndicatorTimer.Stop();  
                 ColorsController.setManuallyCreatedColors(this.keyARGBManualParams.ToArray());

@@ -71,7 +71,7 @@ namespace Colors.view {
 
         public bool show() {
             this.ShowDialog();
-            return isAcceptButtonPressed;
+            return this.isAcceptButtonPressed;
         }
 
         private void AcceptBtn_Click(object sender, EventArgs e) {
@@ -80,11 +80,11 @@ namespace Colors.view {
         }
 
         private void PickupFrecuencyIndicatorTimer_Tick(object sender, EventArgs e) {
-            if (isPickupActivated) {
-                isPickupActivated = false;
+            if (this.isPickupActivated) {
+                this.isPickupActivated = false;
                 InfoLbl.BackColor = Color.Green;
             } else {
-                isPickupActivated = true;
+                this.isPickupActivated = true;
                 InfoLbl.BackColor = Color.Blue;
             }
         }

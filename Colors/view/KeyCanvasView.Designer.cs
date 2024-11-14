@@ -30,6 +30,7 @@ namespace Colors.view {
             this.AcceptBtn = new System.Windows.Forms.Button();
             this.PickupFrecuencyIndicatorTimer = new System.Windows.Forms.Timer(this.components);
             this.InfoLbl = new System.Windows.Forms.Label();
+            this.KeyConstructionProgressLbl = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.KeyCanvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,17 +61,29 @@ namespace Colors.view {
             // InfoLbl
             // 
             this.InfoLbl.AutoSize = true;
-            this.InfoLbl.Location = new System.Drawing.Point(40, 339);
+            this.InfoLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.InfoLbl.Location = new System.Drawing.Point(20, 339);
             this.InfoLbl.Name = "InfoLbl";
-            this.InfoLbl.Size = new System.Drawing.Size(40, 17);
+            this.InfoLbl.Size = new System.Drawing.Size(44, 17);
             this.InfoLbl.TabIndex = 2;
             this.InfoLbl.Text = "INFO";
+            // 
+            // KeyConstructionProgressLbl
+            // 
+            this.KeyConstructionProgressLbl.AutoSize = true;
+            this.KeyConstructionProgressLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeyConstructionProgressLbl.Location = new System.Drawing.Point(22, 383);
+            this.KeyConstructionProgressLbl.Name = "KeyConstructionProgressLbl";
+            this.KeyConstructionProgressLbl.Size = new System.Drawing.Size(112, 18);
+            this.KeyConstructionProgressLbl.TabIndex = 3;
+            this.KeyConstructionProgressLbl.Text = "PROGRESS: ";
             // 
             // KeyCanvasView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(371, 427);
+            this.Controls.Add(this.KeyConstructionProgressLbl);
             this.Controls.Add(this.InfoLbl);
             this.Controls.Add(this.AcceptBtn);
             this.Controls.Add(this.KeyCanvas);
@@ -90,5 +103,6 @@ namespace Colors.view {
         private System.Windows.Forms.Button AcceptBtn;
         private System.Windows.Forms.Timer PickupFrecuencyIndicatorTimer;
         private System.Windows.Forms.Label InfoLbl;
+        private System.Windows.Forms.Label KeyConstructionProgressLbl;
     }
 }

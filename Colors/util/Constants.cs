@@ -97,6 +97,8 @@ namespace Colors.util
         public const string STACK_TRACE_DICTIONARY = "System.Collections.Generic.Dictionary";
         // Información creación manual de clave:
         public const string KEY_MANUAL_CREATION_INFO = "MOVE THE MOUSE INSIDE THE CANVAS";
+        // Porcentaje del progreso de creación de la clave:
+        public const string KEY_PROGRESS_PERCENT = "PROGRESS: {0}%";
         // Información conservar clave manual si se cierra con el aspa roja:
         public const string KEY_MANUAL_CREATION_CLOSE_SAVE_ALERT = "The key is created, Accept to save it or Cancel to delete it.";
 

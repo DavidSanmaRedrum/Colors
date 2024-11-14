@@ -16,7 +16,6 @@ namespace Colors.view {
         private bool isPickupActivated = true;
         private string argbColor = "";
         private char argbSeparator = Constants.KEY_VALUE_COLOR_ARGB_SEPARATOR;
-        
 
         public KeyCanvasView() {
             InitializeComponent();
@@ -40,6 +39,8 @@ namespace Colors.view {
             AcceptBtn.Enabled = false;
             AcceptBtn.BackColor = black;
 
+            KeyConstructionProgressLbl.ForeColor = Color.White;
+            KeyConstructionProgressLbl.Text = String.Format(Constants.KEY_PROGRESS_PERCENT, 0);
             InfoLbl.Text = Constants.KEY_MANUAL_CREATION_INFO;
             // AcceptBtn.ForeColor = Color.Gray;
 
@@ -48,7 +49,8 @@ namespace Colors.view {
         }
 
         private void KeyCanvas_MouseMove(object sender, MouseEventArgs e) {
-            if (this.keyARGBManualParams.Count < this.keyARGBSize) {
+            int currentColorQuantity = this.keyARGBManualParams.Count;
+            if (currentColorQuantity < this.keyARGBSize + 1) {
                 int xPos = Convert.ToInt32(e.X);
                 int yPos = Convert.ToInt32(e.Y);
                 if (this.firstTurn) {
@@ -58,6 +60,8 @@ namespace Colors.view {
                     this.firstTurn = true;
                     this.argbColor += xPos.ToString() + this.argbSeparator + yPos.ToString();
                     this.keyARGBManualParams.Add(this.argbColor);
+                    KeyConstructionProgressLbl.Text = 
+                        String.Format(Constants.KEY_PROGRESS_PERCENT, currentColorQuantity * 100 / this.keyARGBSize);
                 }
             } else {
                 PickupFrecuencyIndicatorTimer.Stop();  

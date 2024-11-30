@@ -10,6 +10,7 @@ namespace Colors.view {
 
         private int functionality = Constants.CANCEL_FUNCTIONALITY_CODE;
         private bool isPreviewActivated;
+        private bool isPasteActivated;
         private string decryptTextForPreview;
 
         public CommonTextView() {
@@ -20,6 +21,8 @@ namespace Colors.view {
         private void CommonTextView_Load(object sender, EventArgs e) {
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+
+            this.isPasteActivated = false;
 
             this.isPreviewActivated = ColorsController.getIsPreviewActivated();
             this.decryptTextForPreview = ColorsController.getDecryptTextForPreview();
@@ -74,14 +77,30 @@ namespace Colors.view {
         }
 
         private void CommonTextField_KeyDown(object sender, KeyEventArgs e) {
-            if (e.KeyCode.Equals(Keys.Enter)) {
+            Keys currentKeyPressed = e.KeyCode;
+            if (currentKeyPressed.Equals(Keys.Enter)) {
                 e.SuppressKeyPress = true;
                 string text = CommonTextField.Text;
-                text += Constants.KEY_VALUE_LINE_FEED + "";
+                text += Constants.KEY_VALUE_LINE_FEED;
                 CommonTextField.Text = text;
                 CommonTextField.SelectionStart = text.Length;
-            } else if (e.Control) {
-                e.SuppressKeyPress = true;
+            } else if (e.Control && currentKeyPressed.Equals(Keys.V)) {
+                // El replace lo hago en el evento KeyUp porque si se hace aquí, el primer texto obtenido está vacío,
+                // en el evento KeyUp ya tiene registro de lo que se acaba de pegar, al hacer CTRL + V aquí y hacer
+                // Console.WriteLine(CommonTextField.Text) va a devolver vacío y en el KeyUp al levantar la tecla
+                // ya va a haber información.
+                this.isPasteActivated = true;
+            }
+        }
+
+        private void CommonTextField_KeyUp(object sender, KeyEventArgs e) {
+            // Si no le pongo este if me pone un duplicado extra, uno por soltar la tecla CTRL y el otro por soltar la tecla V.
+            if (this.isPasteActivated) {
+                this.isPasteActivated = false;
+                string text = CommonTextField.Text;
+                text = text.Replace(Constants.KEY_VALUE_LINE_FEED_TWO, Constants.KEY_VALUE_LINE_FEED);
+                CommonTextField.Text = text;
+                CommonTextField.SelectionStart = text.Length;
             }
         }
     }

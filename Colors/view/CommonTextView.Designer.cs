@@ -38,6 +38,7 @@ namespace Colors.view {
             this.CommonTextField.TabIndex = 0;
             this.CommonTextField.Text = "";
             this.CommonTextField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CommonTextField_KeyDown);
+            this.CommonTextField.KeyUp += new System.Windows.Forms.KeyEventHandler(this.CommonTextField_KeyUp);
             // 
             // CloseBtn
             // 

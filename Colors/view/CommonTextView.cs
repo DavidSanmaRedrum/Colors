@@ -45,7 +45,6 @@ namespace Colors.view {
                 CommonTextField.Text = this.decryptTextForPreview;
                 CommonBtn.Text = Constants.COLORS_SAVE;
             } else {
-                
                 CommonBtn.Text = Constants.COLORS_ACCEPT;
             }
             

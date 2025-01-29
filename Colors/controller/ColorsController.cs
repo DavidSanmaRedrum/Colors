@@ -143,8 +143,8 @@ namespace Colors.controller {
             // Si algún char no está contemplado dentro de characters no lo va a poner, en ese caso, se reducirá la longitud del texto, luego se compensará en los while con espacios.
             textOfFile = encryptOrDecryptTextOnly(textOfFile, letterColorsQuantity, true); // La key se sacará del número de colores que tenga asignado cada letra.
             int pixelCounter = 0;
-            int baseAndHeight = 1;
-            int area = 1;
+            int baseAndHeight = 0;
+            int area = 0;
             string characters = Constants.CHARACTERS;
 
             while (area < textOfFile.Length) {
@@ -160,7 +160,7 @@ namespace Colors.controller {
             }
             try {
                 Random randomPosition = new Random();
-                Bitmap bitmap = new Bitmap(baseAndHeight - 1, baseAndHeight - 1);
+                Bitmap bitmap = new Bitmap(baseAndHeight - 1, baseAndHeight - 1); // Se pone el -1 para que sea se rellene el bitmap de manera uniforme en consonancia con el número de chars.
                 for (int nRow = 0; nRow < bitmap.Width; nRow++) {
                     for (int nCol = 0; nCol < bitmap.Height; nCol++) {
                         string[] characterColors = mapListEncryptKeyValues[textOfFile[pixelCounter]]; // Obtener el valor/Color con la clave (la clave, es el char actual).
@@ -171,7 +171,7 @@ namespace Colors.controller {
                     }
                 }
                 return bitmap;
-            } catch (Exception e) {
+            } catch (Exception) {
                 return null;
             }
         }
@@ -207,7 +207,7 @@ namespace Colors.controller {
                 }
                 sr.Close();
                 return output; // Pondrá un salto de línea extra. //output.Substring(0, output.Length - 1);
-            } catch (Exception e) {
+            } catch (Exception) {
                 return "";
             }
         }
@@ -230,7 +230,7 @@ namespace Colors.controller {
                 }
                 sw.Close();
                 return true;
-            } catch (Exception e) {
+            } catch (Exception) {
                 return false;
             }
         }

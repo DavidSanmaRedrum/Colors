@@ -26,7 +26,7 @@ namespace Colors {
             ColorsController.setIcon(Icon.FromHandle(((Bitmap)ColorsImageList.Images[0]).GetHicon()));
 
             ActionBtn.BackColor = Color.WhiteSmoke;
-            refreshActionBtn();
+            this.refreshViewToFirstState();
 
             string output;
 
@@ -53,7 +53,7 @@ namespace Colors {
 
         private void OpenFileBtn_Click(object sender, EventArgs e) {
             ColorsController.setTextDataWithoutFile(""); // Vaciar esto por si acaso.
-            refreshActionBtn();
+            this.refreshViewToFirstState(); // Lo vuelve a poner al primer estado y si no se hace nada dentro del formulario y se da a cancelar, se queda como está.
 
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = Constants.OPEN_FILE_DIALOG_TITLE;
@@ -62,29 +62,22 @@ namespace Colors {
             if (openFileDialog.ShowDialog() == DialogResult.OK) {
                 this.filePath = openFileDialog.FileName;
                 string actionButtonTitle = Constants.ACTION_BUTTON_ENCRYPT;
+                Color buttonColor = Color.Blue;
                 if (!this.filePath.EndsWith(Constants.TXT_EXTENSION)) {
-                    ActionBtn.ForeColor = Color.Red;
+                    buttonColor = Color.Red;
                     actionButtonTitle = Constants.ACTION_BUTTON_DECRYPT;
-                } else {
-                    ActionBtn.ForeColor = Color.Blue;
                 }
-                
-                ActionBtn.Text = actionButtonTitle;
-                ActionBtn.Enabled = true;
-                DestroyKeyBtn.Enabled = false;
+                this.changeViewState(buttonColor, actionButtonTitle, true, false);
             }
         }
 
         private void TextWithoutFileBtn_Click(object sender, EventArgs e) {
             this.filePath = ""; // Vaciar esto por si acaso.
-            refreshActionBtn();
+            this.refreshViewToFirstState();
             CommonTextView textWithoutFileInput = new CommonTextView();
             ColorsController.setIsPreviewActivated(false);
             if (textWithoutFileInput.show() == Constants.TEXT_WITHOUT_FILE_FUNCTIONALITY_CODE) {
-                ActionBtn.ForeColor = Color.Green;
-                ActionBtn.Text = Constants.ACTION_BUTTON_ENCRYPT;
-                ActionBtn.Enabled = true;
-                DestroyKeyBtn.Enabled = false;
+                this.changeViewState(Color.Green, Constants.ACTION_BUTTON_ENCRYPT, true, false);
             }
         }
 
@@ -108,7 +101,7 @@ namespace Colors {
         }
 
         private void ActionBtn_Click(object sender, EventArgs e) {
-            refreshActionBtn();
+            this.refreshViewToFirstState();
             string path = this.filePath;
             string data = ColorsController.getTextDataWithoutFile();
             if (path.EndsWith(Constants.TXT_EXTENSION) || data.Length > 0) {
@@ -142,13 +135,20 @@ namespace Colors {
                 }
                 encryptedImage.Dispose(); // Hacer que el programa deje de usar la imagen.
             }
-            DestroyKeyBtn.Enabled = true;
             this.filePath = "";
         }
 
-        private void refreshActionBtn() {
+        private void refreshViewToFirstState() {
             ActionBtn.Text = Constants.ACTION_BUTTON_NEUTRAL;
             ActionBtn.Enabled = false;
+            DestroyKeyBtn.Enabled = true;
+        }
+
+        private void changeViewState(Color foreColor, string title, bool isActionButtonEnabled, bool isDestroyKeyButtonEnabled) {
+            ActionBtn.ForeColor = foreColor;
+            ActionBtn.Text = title;
+            ActionBtn.Enabled = isActionButtonEnabled;
+            DestroyKeyBtn.Enabled = isDestroyKeyButtonEnabled;
         }
 
     }

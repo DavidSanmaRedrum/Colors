@@ -206,7 +206,7 @@ namespace Colors.controller {
                     output += line + Constants.KEY_VALUE_LINE_FEED;
                 }
                 sr.Close();
-                return output; // Pondrá un salto de línea extra. //output.Substring(0, output.Length - 1);
+                return output.Substring(0, output.Length - 1); // Quitar el último salto de línea.
             } catch (Exception) {
                 return "";
             }
